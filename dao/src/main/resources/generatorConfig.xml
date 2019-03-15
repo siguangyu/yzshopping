@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry location="E:\maven_repository\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar" />
+
+	<context id="context1" targetRuntime="MyBatis3">
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/yzshopping" userId="root"
+			password="root">
+		</jdbcConnection>
+
+		<!-- <javaTypeResolver> -->
+		<!-- <property name="forceBigDecimals" value="false" /> -->
+<!-- 	</javaTypeResolver> -->
+		<!-- 实体定义地址 -->
+		<javaModelGenerator targetPackage="com.yz.mybatis.entity"
+			targetProject="C:\Users\53KF\IdeaProjects\yzshopping\dao\src\main\java" />
+		<!-- sql的配置文件定义 -->
+		<sqlMapGenerator targetPackage="mybatisMapper"
+			targetProject="C:\Users\53KF\IdeaProjects\yzshopping\dao\src\main\resources" />
+		<!-- DAO定义 XMLMAPPER是xml的配置方式，还有ANNOTabelMapper的是注解方式 -->
+		<javaClientGenerator targetPackage="com.yz.mybatis.persistence"
+			targetProject="C:\Users\53KF\IdeaProjects\yzshopping\dao\src\main\java" type="XMLMAPPER" />
+
+		<!--<table tableName="pn_record_file" domainObjectName="PnRecordFile" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+		<!--<table tableName="pn_axb_modify_new" domainObjectName="PnAxbModifyNew" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+		<table tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+
+
+
+		<!--不需要-->
+		<!--<table tableName="pn_pay_log" domainObjectName="PnPayLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+
+
+	</context>
+</generatorConfiguration>
