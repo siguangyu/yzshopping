@@ -39,9 +39,8 @@ public class SpiderController {
     @GetMapping("/bijia")
     public Result biJia(@RequestParam(value = "key", defaultValue = "") String key, @RequestParam(value = "page", defaultValue = "1") int pageNum) {
         // System.out.println("---------->>biJia" + key + "==>>" + pageNum);
-        if ("".equals(key)) return ResultHandle.getFailResult("key can not be empty");
-
-
+        if ("".equals(key)||"undefined".equals(key))
+            return ResultHandle.getFailResult("key can not be empty");
         Map<String, Object> process = biBiJing.process(key, pageNum);
         return ResultHandle.getSuccessResult().setData(process);
     }
