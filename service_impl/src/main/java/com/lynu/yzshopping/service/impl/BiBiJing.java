@@ -74,7 +74,8 @@ public class BiBiJing {
             data = commonUtil.deleteEndLenString(data, 1);
             data = "{\"page\":" + data + "}";
 
-            return JSONObject.parseObject(data);
+            JSONObject jsonObject = JSONObject.parseObject(data);
+            return jsonObject;
         } catch (Exception e) {
             e.printStackTrace();
         }

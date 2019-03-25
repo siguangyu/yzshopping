@@ -73,7 +73,7 @@
 				<div class="py-container">
 					<div class="yui3-g Logo">
 						<div class="yui3-u Left logoArea">
-							<a class="logo-bd" title="品优购" href="JD-index.html"
+							<a class="logo-bd" title="悠哉" href="JD-index.html"
 								target="_blank"></a>
 						</div>
 						<div class="yui3-u Center searchArea">
@@ -238,7 +238,7 @@
 						<ul class="sui-nav">
 							<li class="active"><a href="#" ng-click="sortSearch('','')">综合</a></li>
 							<li><a href="#">销量</a></li>
-							<li><a href="#" ng-click="sortSearch('updatetime','DESC'>新品</a></li>
+							<li><a href="#" ng-click="sortSearch('updatetime','DESC')">新品</a></li>
 							<li><a href="#">评价</a></li>
 							<li><a href="#" ng-click="sortSearch('price','ASC')">价格↑</a></li>
 							<li><a href="#" ng-click="sortSearch('price','DESC')">价格↓</a></li>
@@ -250,22 +250,22 @@
 						<li class="yui3-u-1-5" ng-repeat="item in resultMap.data.page">
 							<div class="list-wrap">
 								<div class="p-img">
-									<a href="http://localhost:9105/{{item.id}}.html" target="_blank"><img
-										src="{{item.imgUrl}}" /></a>
+									<a href="http://localhost:9090/detail.html" target="_blank" ng-click="putItem(item)">
+										<img src="{{item.imgUrl}}" /></a>
 								</div>
 								<div class="price">
 									<strong> <em>¥</em> <i>{{item.price}}</i>
 									</strong>
 								</div>
 								<div class="attr" ng-bind-html="item.title | trustHtml">
-									<em>{{item.title}}</em>
+									<em class="em">{{item.title}}</em>
 								</div>
 								<div class="cu">
 									<em></em>
 								</div>
-								<div class="commit">
+								<!--<div class="commit">
 									<i class="command">已有2000人评价</i>
-								</div>
+								</div>-->
 								<div class="operate">
 									<a href="success-cart.html" target="_blank"
 										class="sui-btn btn-bordered btn-danger">加入购物车</a> <a

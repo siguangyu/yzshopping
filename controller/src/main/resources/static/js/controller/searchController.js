@@ -1,5 +1,10 @@
 app.controller('searchController', function($scope, $location,searchService) {
 
+
+	$scope.putItem=function(item){
+		localStorage.setItem("item",JSON.stringify(item));
+	}
+
 	// 搜索对象
 	$scope.searchMap = {
 		'key' : '',

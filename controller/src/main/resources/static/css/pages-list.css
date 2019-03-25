@@ -184,14 +184,26 @@ ul.logo-list li {
 
 .p-img,
 .price,
-.attr,
 .cu,
 .commit,
 .operate {
 	padding-left: 15px
 }
 
-.attr,
+.attr {
+	width: 215px;
+	padding-left: 15px;
+	/*height: 22px;*/
+
+}
+.em{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2
+}
+
 .cu,
 .commit {
 	height: 22px
