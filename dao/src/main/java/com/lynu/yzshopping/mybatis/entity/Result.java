@@ -1,12 +1,14 @@
 package com.lynu.yzshopping.mybatis.entity;
 
+import java.io.Serializable;
+
 /**
  * @program: data-interface
  * @description: 响应结果
  * @author: houyu
  * @create: 2018-12-10 00:59
  */
-public class Result {
+public class Result implements Serializable{
 
     //状态码
     private int code;

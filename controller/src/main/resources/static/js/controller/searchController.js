@@ -2,7 +2,7 @@ app.controller('searchController', function($scope, $location,searchService) {
 
 
 	$scope.putItem=function(item){
-		localStorage.setItem("item",JSON.stringify(item));
+		sessionStorage.setItem("item",JSON.stringify(item));
 	}
 
 	// 搜索对象

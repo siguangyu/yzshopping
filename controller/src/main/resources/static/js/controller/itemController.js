@@ -3,7 +3,7 @@ app.controller('itemController',function($scope,$http){
     $scope.specificationItems={};//记录用户选择的规格
 
 	$scope.getItemDetail=function () {
-		$scope.item=JSON.parse(localStorage.getItem("item"));
+		$scope.item=JSON.parse(sessionStorage.getItem("item"));
     }
 
 

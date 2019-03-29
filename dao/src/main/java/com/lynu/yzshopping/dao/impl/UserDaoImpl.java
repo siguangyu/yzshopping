@@ -6,6 +6,7 @@ import com.lynu.yzshopping.mybatis.persistence.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 @Repository("userDao")
 public class UserDaoImpl implements UserDao{
@@ -18,7 +19,12 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public User selectByConditionMap(Map<String, Object> map) {
+    public List<User> selectByConditionMap(Map<String, Object> map) {
         return userMapper.selectByConditionMap(map);
+    }
+
+    @Override
+    public int insertSelective(User record) {
+        return userMapper.insertSelective(record);
     }
 }

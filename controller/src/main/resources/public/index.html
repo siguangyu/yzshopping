@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-	<title>品优购，优质！优质！</title>
+	<title>悠闲！省心！GO!</title>
 	 <link rel="icon" href="assets/img/favicon.ico">
 
     <link rel="stylesheet" type="text/css" href="css/webbase.css" />
@@ -19,7 +19,7 @@
     
 </head>
 
-<body ng-app="pinyougou" ng-controller="contentController" ng-init="findByCategoryId(1)">
+<body ng-app="pinyougou" ng-controller="contentController" >
 	<!-- 头部栏位 -->
 	<!--页面顶部-->
 <div id="nav-bottom">
@@ -29,31 +29,19 @@
 			<div class="py-container">
 				<div class="shortcut">
 					<ul class="fl">
-						<li class="f-item">品优购欢迎您！</li>
-						<li class="f-item">请<a href="login.html" target="_blank">登录</a>　<span><a href="register.html" target="_blank">免费注册</a></span></li>
+						<li class="f-item">悠哉购物欢迎您！</li>
 					</ul>
 					<ul class="fr">
-						<li class="f-item">我的订单</li>
+						<li class="f-item">请<a href="login.html" target="_blank">登录</a>　<span><a href="register.html" target="_blank">免费注册</a></span></li>
 						<li class="f-item space"></li>
-						<li class="f-item"><a href="home.html" target="_blank">我的品优购</a></li>
+						<li class="f-item">我的收藏</li>
 						<li class="f-item space"></li>
-						<li class="f-item">品优购会员</li>
+						<li class="f-item">个人中心</li>
 						<li class="f-item space"></li>
-						<li class="f-item">企业采购</li>
+						<li class="f-item">积分商城</li>
 						<li class="f-item space"></li>
-						<li class="f-item">关注品优购</li>
+						<li class="f-item">帮助中心</li>
 						<li class="f-item space"></li>
-						<li class="f-item" id="service">
-							<span>客户服务</span>
-							<ul class="service">
-								<li><a href="cooperation.html" target="_blank">合作招商</a></li>
-								<li><a href="shoplogin.html" target="_blank">商家后台</a></li>
-								<li><a href="cooperation.html" target="_blank">合作招商</a></li>
-								<li><a href="#">商家后台</a></li>
-							</ul>
-						</li>
-						<li class="f-item space"></li>
-						<li class="f-item">网站导航</li>
 					</ul>
 				</div>
 			</div>
@@ -64,7 +52,7 @@
 			<div class="py-container">
 				<div class="yui3-g Logo">
 					<div class="yui3-u Left logoArea">
-						<a class="logo-bd" title="悠哉" href="index.html" target="_blank"></a>
+						<a class="logo-bd" title="悠哉" href="index.html" target="_top"></a>
 					</div>
 					<div class="yui3-u Center searchArea">
 						<div class="search">
@@ -78,18 +66,19 @@
 						</div>
 						<div class="hotwords">
 							<ul>
-								<li class="f-item">品优购首发</li>
-								<li class="f-item">亿元优惠</li>
-								<li class="f-item">9.9元团购</li>
-								<li class="f-item">每满99减30</li>
-								<li class="f-item">亿元优惠</li>
-								<li class="f-item">9.9元团购</li>
-								<li class="f-item">办公用品</li>
-
+								<li class="f-item">今日热门：</li>
+								<li class="f-item">童装</li>
+								<li class="f-item">雪纺裙</li>
+								<li class="f-item">小白裙</li>
+								<li class="f-item">手机</li>
+								<li class="f-item">链条包</li>
+								<li class="f-item">童装</li>
+								<li class="f-item">衬衣</li>
+								<li class="f-item">洗衣液</li>
 							</ul>
 						</div>
 					</div>
-					<div class="yui3-u Right shopArea">
+					<!--<div class="yui3-u Right shopArea">
 						<div class="fr shopcar">
 							<div class="show-shopcar" id="shopcar">
 								<span class="car"></span>
@@ -103,7 +92,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div>-->
 				</div>
 
 				<div class="yui3-g NavList">
@@ -114,12 +103,12 @@
 						<ul class="nav">
 							<li class="f-item">服装城</li>
 							<li class="f-item">美妆馆</li>
-							<li class="f-item">品优超市</li>
+							<li class="f-item">悠哉超市</li>
 							<li class="f-item">全球购</li>
 							<li class="f-item">闪购</li>
 							<li class="f-item">团购</li>
 							<li class="f-item">有趣</li>
-							<li class="f-item"><a href="seckill-index.html" target="_blank">秒杀</a></li>
+							<!--<li class="f-item"><a href="seckill-index.html" target="_blank">秒杀</a></li>-->
 						</ul>
 					</div>
 					<div class="yui3-u Right"></div>
@@ -541,7 +530,7 @@
 				</div>
 				<div class="yui3-u Right">
 					<div class="news">
-						<h4><em class="fl">品优购快报</em><span class="fr tip">更多 ></span></h4>
+						<h4><em class="fl">悠哉快报</em><span class="fr tip">更多 ></span></h4>
 						<div class="clearix"></div>
 						<ul class="news-list unstyled">
 							<li>
@@ -561,7 +550,7 @@
 							</li>
 						</ul>
 					</div>
-					<ul class="yui3-g Lifeservice">
+					<!--<ul class="yui3-g Lifeservice">
 						<li class="yui3-u-1-4 life-item tab-item">
 							<i class="list-item list-item-1"></i>
 							<span class="service-intro">话费</span>
@@ -629,7 +618,7 @@
 						<div class="life-detail">
 							<i class="close">关闭</i> 游戏
 						</div>
-					</div>
+					</div>-->
 					<div class="ads">
 						<img src="img/ad1.png" />
 					</div>
@@ -1087,55 +1076,55 @@
 <div class="clearfix footer">
 	<div class="py-container">
 		<div class="footlink">
-			<div class="Mod-service">
-				<ul class="Mod-Service-list">
-					<li class="grid-service-item intro  intro1">
+			<!--<div class="Mod-service">-->
+				<!--<ul class="Mod-Service-list">-->
+					<!--<li class="grid-service-item intro  intro1">-->
 
-						<i class="serivce-item fl"></i>
-						<div class="service-text">
-							<h4>正品保障</h4>
-							<p>正品保障，提供发票</p>
-						</div>
+						<!--<i class="serivce-item fl"></i>-->
+						<!--<div class="service-text">-->
+							<!--<h4>正品保障</h4>-->
+							<!--<p>正品保障，提供发票</p>-->
+						<!--</div>-->
 
-					</li>
-					<li class="grid-service-item  intro intro2">
+					<!--</li>-->
+					<!--<li class="grid-service-item  intro intro2">-->
 
-						<i class="serivce-item fl"></i>
-						<div class="service-text">
-							<h4>正品保障</h4>
-							<p>正品保障，提供发票</p>
-						</div>
+						<!--<i class="serivce-item fl"></i>-->
+						<!--<div class="service-text">-->
+							<!--<h4>正品保障</h4>-->
+							<!--<p>正品保障，提供发票</p>-->
+						<!--</div>-->
 
-					</li>
-					<li class="grid-service-item intro  intro3">
+					<!--</li>-->
+					<!--<li class="grid-service-item intro  intro3">-->
 
-						<i class="serivce-item fl"></i>
-						<div class="service-text">
-							<h4>正品保障</h4>
-							<p>正品保障，提供发票</p>
-						</div>
+						<!--<i class="serivce-item fl"></i>-->
+						<!--<div class="service-text">-->
+							<!--<h4>正品保障</h4>-->
+							<!--<p>正品保障，提供发票</p>-->
+						<!--</div>-->
 
-					</li>
-					<li class="grid-service-item  intro intro4">
+					<!--</li>-->
+					<!--<li class="grid-service-item  intro intro4">-->
 
-						<i class="serivce-item fl"></i>
-						<div class="service-text">
-							<h4>正品保障</h4>
-							<p>正品保障，提供发票</p>
-						</div>
+						<!--<i class="serivce-item fl"></i>-->
+						<!--<div class="service-text">-->
+							<!--<h4>正品保障</h4>-->
+							<!--<p>正品保障，提供发票</p>-->
+						<!--</div>-->
 
-					</li>
-					<li class="grid-service-item intro intro5">
+					<!--</li>-->
+					<!--<li class="grid-service-item intro intro5">-->
 
-						<i class="serivce-item fl"></i>
-						<div class="service-text">
-							<h4>正品保障</h4>
-							<p>正品保障，提供发票</p>
-						</div>
+						<!--<i class="serivce-item fl"></i>-->
+						<!--<div class="service-text">-->
+							<!--<h4>正品保障</h4>-->
+							<!--<p>正品保障，提供发票</p>-->
+						<!--</div>-->
 
-					</li>
-				</ul>
-			</div>
+					<!--</li>-->
+				<!--</ul>-->
+			<!--</div>-->
 			<div class="clearfix Mod-list">
 				<div class="yui3-g">
 					<div class="yui3-u-1-6">
@@ -1185,14 +1174,14 @@
 							<li>夺宝岛</li>
 							<li>DIY装机</li>
 							<li>延保服务</li>
-							<li>品优购E卡</li>
-							<li>品优购通信</li>
+							<li>E卡</li>
+							<li>通信</li>
 						</ul>
 					</div>
-					<div class="yui3-u-1-6">
+					<!--<div class="yui3-u-1-6">
 						<h4>帮助中心</h4>
 						<img src="img/wx_cz.jpg">
-					</div>
+					</div>-->
 				</div>
 			</div>
 			<div class="Mod-copyright">
@@ -1208,7 +1197,7 @@
 					<li>友情链接<span class="space"></span></li>
 					<li>关于我们</li>
 				</ul>
-				<p>地址：北京市昌平区建材城西路金燕龙办公楼一层 邮编：100096 电话：400-618-4000 传真：010-82935100</p>
+				<p>地址：河南省洛阳市洛阳师范学院信息技术学院移动一班 邮编：461400 电话：400-618-4000 传真：010-82935100</p>
 				<p>京ICP备08001421号京公网安备110108007702</p>
 			</div>
 		</div>
