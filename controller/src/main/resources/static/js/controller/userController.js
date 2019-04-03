@@ -8,7 +8,10 @@ app.controller('userController', function ($scope, $controller, userService) {
         }
         userService.add($scope.entity).success(
             function (response) {
-                alert(response.message);
+                alert(response.message+"!去登陆");
+                if (response.code==200){
+                    window.location="../login.html";
+                }
                 //注册成功之后，把
             }
         );

@@ -34,3 +34,9 @@ pagehelper:
     reasonable: true
     supportMethodsArguments: true
     params: count=countSql
+#本地测试用看日志
+logging:
+  #file: god.log
+  #path: /Users/wujiaqi/Desktop
+  #level: debug
+  config: classpath:logbackConfig/logback-eiisyspn-dev.xml

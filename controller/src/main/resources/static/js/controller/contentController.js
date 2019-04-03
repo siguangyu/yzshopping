@@ -13,4 +13,6 @@ app.controller("contentController",function($scope,contentService){
         location.href="http://localhost:9090/search.html#?key="+$scope.key;
 	}
 
+	
+
 });

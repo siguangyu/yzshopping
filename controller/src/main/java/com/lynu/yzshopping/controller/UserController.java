@@ -82,4 +82,20 @@ public class UserController {
 
     }
 
+    @ApiOperation(value = "用户基本信息修改接口", notes = "用户基本信息修改接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String", paramType = "query")
+    })
+    @PostMapping("updateUserInfo")
+    public Result updateUserInfo(HttpServletRequest request) {
+        String id = request.getParameter("id");
+
+
+
+        return ResultHandle.getSuccessResult("修改成功");
+    }
+
+
 }

@@ -15,64 +15,7 @@
 <script type="text/javascript" src="js/base.js"></script>
 <script type="text/javascript" src="js/service/userService.js"></script>
 <script type="text/javascript" src="js/controller/userController.js"></script>
-<script>
-	var code ; //在全局定义验证码
-	var isCheckCode=true;
 
-	function createCode(){
-	code = "8888";
-        var checkCode = document.getElementById("code");
-	/*var codeLength = 4;//验证码的长度
-
-	var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',
-	'S','T','U','V','W','X','Y','Z');//随机数
-	for(var i = 0; i < codeLength; i++) {//循环操作
-	var index = Math.floor(Math.random()*36);//取得随机数的索引（0~35）
-	code += random[index];//根据索引取得随机数加到code上
-	}*/
-	checkCode.value = code;//把code值赋给验证码
-	}
-	//校验验证码
-	function validate(){
-	var inputCode = document.getElementById("input").value.toUpperCase(); //取得输入的验证码并转化为大写
-	if(inputCode.length <= 0) { //若输入的验证码长度为0
-	alert("请输入验证码！"); //则弹出请输入验证码
-	}else if(inputCode != code ) { //若输入的验证码与产生的验证码不一致时
-	alert("验证码输入错误！@_@"); //则弹出验证码输入错误
-	createCode();//刷新验证码
-	document.getElementById("input").value = "";//清空文本框
-	}else { //输入正确时
-	alert("合格！^-^");
-	}
-	}
-    angular.element(document).ready(function(){
-        createCode()
-    });
-
-	//键盘监听事件，自动校验验证码
-	function isCode(){
-        var inputCode = document.getElementById("input").value.toUpperCase(); //取得输入的验证码并转化为大写
-		var registerButton=document.getElementById("registerButton");
-        registerButton.setAttribute("disabled",isCheckCode);
-        if(inputCode.length == 4) { //若输入的验证码长度为4
-            if (inputCode==code){
-                isCheckCode=false;
-                console.log(isCheckCode);
-				registerButton.setAttribute("disabled",isCheckCode);
-                alert(isCheckCode);
-                alert("验证码正确")
-			}
-        }
-        else{
-            isCheckCode=true;
-            registerButton.setAttribute("disabled",isCheckCode);
-		}
-	}
-
-
-
-
-</script>
 	<style type='text/css'>
 		#code{
 			font-family:Arial,宋体;
@@ -148,13 +91,13 @@
 								   required minlength="4"  onkeyup="isCode()">
 							<input type="button" id="code" onclick="createCode()" style="width:60px;height: 40px" title='点击更换验证码' />
 						</div>
-						<input type = "button" value = "验证" onclick = "validate()"/>
+						<!--<input type = "button" value = "验证" onclick = "validate()"/>-->
 					</div>
 
 					<div class="control-group">
 						<label for="inputPassword" class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 						<div class="controls">
-							<input name="m1" type="checkbox" value="2" checked=""><span>同意协议并注册《品优购用户协议》</span>
+							<input name="m1" type="checkbox" value="2" checked=""><span>同意协议并注册《悠哉购物用户协议》</span>
 						</div>
 					</div>
 					<!--<div class="control-group">-->
@@ -194,7 +137,68 @@
 		</div>
 	</div>
 
-
+	<script>
+		var code ; //在全局定义验证码
+		// var isCheckCode=true;
+	
+		function createCode(){
+		code = "8888";
+			var checkCode = document.getElementById("code");
+		/*var codeLength = 4;//验证码的长度
+	
+		var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',
+		'S','T','U','V','W','X','Y','Z');//随机数
+		for(var i = 0; i < codeLength; i++) {//循环操作
+		var index = Math.floor(Math.random()*36);//取得随机数的索引（0~35）
+		code += random[index];//根据索引取得随机数加到code上
+		}*/
+		checkCode.value = code;//把code值赋给验证码
+		}
+		//校验验证码
+		function validate(){
+		var inputCode = document.getElementById("input").value.toUpperCase(); //取得输入的验证码并转化为大写
+		if(inputCode.length <= 0) { //若输入的验证码长度为0
+		alert("请输入验证码！"); //则弹出请输入验证码
+		}else if(inputCode != code ) { //若输入的验证码与产生的验证码不一致时
+		alert("验证码输入错误！@_@"); //则弹出验证码输入错误
+		createCode();//刷新验证码
+		document.getElementById("input").value = "";//清空文本框
+		}else { //输入正确时
+		alert("合格！^-^");
+		}
+		}
+		// angular.element(document).ready(function(){
+		//     createCode()
+		// });
+		window.onload=function () {
+			createCode();
+        }
+	
+		//键盘监听事件，自动校验验证码
+		var registerButton=document.getElementById("registerButton");
+		registerButton.setAttribute("disabled",true);
+		function isCode(){
+			var inputCode = document.getElementById("input").value.toUpperCase(); //取得输入的验证码并转化为大写
+			if(inputCode.length == 4) { //若输入的验证码长度为4
+				if (inputCode==code){
+					// isCheckCode=false;
+					// console.log(isCheckCode);
+					var remove=registerButton.getAttributeNode("disabled");
+					registerButton.removeAttributeNode(remove);
+					// alert(isCheckCode);
+					alert("验证码正确")
+				}
+			}
+			else{
+				// isCheckCode=true;
+				registerButton.setAttribute("disabled",true);
+			}
+		}
+	
+	
+	
+	
+	</script>
 <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="js/plugins/jquery.easing/jquery.easing.min.js"></script>
 <script type="text/javascript" src="js/plugins/sui/sui.min.js"></script>

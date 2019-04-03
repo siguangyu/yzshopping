@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         String username=jsonObject.getString("username");
         if (username==null||username==""){
             long time = new Date().getTime();
-            String timeStamp=time+"";
+            username=time+"_"+account;
         }
         user.setAccount(account);
         user.setPassword(password);
