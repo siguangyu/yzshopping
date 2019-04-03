@@ -4,8 +4,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.lynu.yzshopping.service.UserService;
 import com.lynu.yzshopping.dao.UserDao;
 import com.lynu.yzshopping.mybatis.entity.User;
+import com.lynu.yzshopping.util.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import sun.security.provider.MD5;
 
 import java.util.Date;
 import java.util.List;
@@ -34,7 +37,8 @@ public class UserServiceImpl implements UserService {
         JSONObject jsonObject = JSONObject.parseObject(jsonBody);
         User user=new User();
         String account=jsonObject.getString("account");
-        String password=jsonObject.getString("password");
+        //使用Md5对密码进行加密处理
+        String password= Md5Util.EncoderByMd5(jsonObject.getString("password"));
         //根据时间戳来设置用户初始昵称
         String username=jsonObject.getString("username");
         if (username==null||username==""){
@@ -47,5 +51,19 @@ public class UserServiceImpl implements UserService {
         user.setUsername(username);
         userDao.insertSelective(user);
         return user.getId();
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public String updateByPrimaryKeySelective(User user) {
+        try{
+            int i = userDao.updateByPrimaryKeySelective(user);
+            if (i==1){
+                return "信息修改成功";
+            }
+            return "修改信息出现错误";
+        }catch (Exception e){
+            return "修改信息出现错误";
+        }
     }
 }

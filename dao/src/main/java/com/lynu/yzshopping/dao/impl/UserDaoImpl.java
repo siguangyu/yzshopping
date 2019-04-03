@@ -27,4 +27,9 @@ public class UserDaoImpl implements UserDao{
     public int insertSelective(User record) {
         return userMapper.insertSelective(record);
     }
+
+    @Override
+    public int updateByPrimaryKeySelective(User record) {
+        return userMapper.updateByPrimaryKeySelective(record);
+    }
 }

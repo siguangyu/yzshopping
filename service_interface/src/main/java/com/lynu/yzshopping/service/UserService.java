@@ -12,4 +12,6 @@ public interface UserService {
     List<User> selectByConditionMap(Map<String,Object> map);
 //   根据非空字段添加用户
     int insertSelective(String jsonBody);
+
+    String updateByPrimaryKeySelective(User user);
 }

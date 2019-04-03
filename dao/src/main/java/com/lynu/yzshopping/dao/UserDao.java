@@ -14,6 +14,10 @@ public interface UserDao {
 //    根据非空字段添加用户
     int insertSelective(User record);
 
+    /*
+    * 根据非空字段更新用户信息
+    * */
+    int updateByPrimaryKeySelective(User record);
 
 
 }

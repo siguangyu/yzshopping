@@ -169,7 +169,6 @@ public class ScoreShopController {
         map.put("status",YZConstants.EXCHANGE_STATUS);
         map.put("userId",userId);
         map.put("goodsId",goodsId);
-
         String res= scoreShopService.SaveOrExchangeShop(map);
         return ResultHandle.getSuccessResult(res);
     }
