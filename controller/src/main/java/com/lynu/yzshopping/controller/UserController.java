@@ -3,14 +3,18 @@ package com.lynu.yzshopping.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lynu.yzshopping.mybatis.entity.Result;
+import com.lynu.yzshopping.mybatis.entity.Score;
+import com.lynu.yzshopping.service.ScoreService;
 import com.lynu.yzshopping.service.UserService;
 import com.lynu.yzshopping.mybatis.entity.User;
+import com.lynu.yzshopping.service.constants.YZConstants;
 import com.lynu.yzshopping.util.Md5Util;
 import com.lynu.yzshopping.util.ResultHandle;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +31,8 @@ public class UserController {
     Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     UserService userService;
+    @Autowired
+    ScoreService scoreService;
 
 
     @ApiOperation(value = "注册用户", notes = "注册用户")
@@ -81,13 +87,35 @@ public class UserController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String", paramType = "query")
     })
-    @PostMapping("selectByPrimaryKey")
+    @GetMapping("selectByPrimaryKey")
     public Result selectByPrimaryKey(HttpServletRequest request) {
         String idStr = request.getParameter("id");
         Integer id = Integer.parseInt(idStr);
 
         User user = userService.selectByPrimaryKey(id);
-        return ResultHandle.getSuccessResult().setData(user);
+        Map<String, Object> userMap = new HashMap<>();
+//        userMap.put("user", user);
+        String birthday = user.getBirthday();
+        String year = "";
+        String month = "";
+        String day = "";
+        if (!StringUtils.isBlank(birthday)) {
+            String[] split = birthday.split("-");
+            year = split[0];
+            month = split[1];
+            day = split[2];
+        }
+        userMap.put("id", user.getId());
+        userMap.put("account", user.getAccount());
+        userMap.put("username", user.getUsername());
+        userMap.put("phoneNumber", user.getPhoneNumber());
+        userMap.put("qq", user.getQq());
+        userMap.put("mail", user.getMail());
+        userMap.put("year", year);
+        userMap.put("month", month);
+        userMap.put("day", day);
+
+        return ResultHandle.getSuccessResult().setData(userMap);
     }
 
 
@@ -98,31 +126,69 @@ public class UserController {
             @ApiImplicitParam(name = "phoneNumber", value = "手机号码", required = false, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "birthday", value = "生日", required = false, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "qq", value = "QQ号码", required = false, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "mail", value = "邮箱", required = false, dataType = "String", paramType = "query")
+            @ApiImplicitParam(name = "mail", value = "邮箱", required = false, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "account", value = "账户", required = false, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "oldPassword", value = "旧密码", required = false, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "newPassword", value = "新密码", required = false, dataType = "String", paramType = "query")
     })
     @PostMapping("updateUserInfo")
-    public Result updateUserInfo(HttpServletRequest request) {
-        String id = request.getParameter("id");
-        String username = request.getParameter("username");
-        String phoneNumber = request.getParameter("phoneNumber");
-        String birthday = request.getParameter("birthday");  //生日的格式  暂定为1996-12-12
-        String qq = request.getParameter("qq");
-        String mail = request.getParameter("mail");
-
-        User user = new User();
-        user.setId(Integer.parseInt(id));
-        user.setUsername(username);
-        user.setBirthday(birthday);
-        user.setQq(qq);
-        user.setPhoneNumber(phoneNumber);
-        user.setMail(mail);
-        user.setUpdateTime(new Date());
-
-        String res = userService.updateByPrimaryKeySelective(user);
-        if (res.contains("成功")) {
-            return ResultHandle.getSuccessResult(res);
+    public Result updateUserInfo(@RequestBody String jsonBody) {
+        JSONObject json = JSONObject.parseObject(jsonBody);
+        String id = (String) json.get("id");
+        String account = (String) json.get("account");
+        String oldPassword = Md5Util.EncoderByMd5((String) json.get("oldPassword"));
+        if (!StringUtils.isBlank(account) && !StringUtils.isBlank(oldPassword)) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", id);
+            map.put("account", account);
+            map.put("password", oldPassword);
+            List<User> userList = userService.selectByConditionMap(map);
+            if (userList.size() != 1) {
+                return ResultHandle.getFailResult("原密码错误");
+            }
+            String newPassword = Md5Util.EncoderByMd5((String) json.get("newPassword"));
+            User user = new User();
+            user.setId(Integer.parseInt(id));
+            user.setAccount(account);
+            user.setPassword(newPassword);
+            user.setUpdateTime(new Date());
+            String res = userService.updateByPrimaryKeySelective(user);
+            if (res.contains("成功")) {
+                return ResultHandle.getSuccessResult(res);
+            } else {
+                return ResultHandle.getFailResult(res);
+            }
         } else {
-            return ResultHandle.getFailResult(res);
+
+            String username = (String) json.get("username");
+//        String phoneNumber = request.getParameter("phoneNumber");
+//        String birthday = (String) json.get("birthday");  //生日的格式  暂定为1996-12-12
+            String year = (String) json.get("year");
+            String month = (String) json.get("month");
+            String day = (String) json.get("day");
+            String birthday = null;
+            if (!StringUtils.isBlank(year) && !StringUtils.isBlank(month) && !StringUtils.isBlank(day)) {
+                birthday = year + "-" + month + "-" + day;
+            }
+            String qq = (String) json.get("qq");
+            String mail = (String) json.get("mail");
+
+            User user = new User();
+            user.setId(Integer.parseInt(id));
+            user.setUsername(username);
+            user.setBirthday(birthday);
+            user.setQq(qq);
+//        user.setPhoneNumber(phoneNumber);
+            user.setMail(mail);
+            user.setUpdateTime(new Date());
+            String res = userService.updateByPrimaryKeySelective(user);
+            if (res.contains("成功")) {
+                Map<String,Object> map=new HashMap<>();
+                map.put("username",userService.selectByPrimaryKey(Integer.parseInt(id)).getUsername());
+                return ResultHandle.getSuccessResult(res).setData(map);
+            } else {
+                return ResultHandle.getFailResult(res);
+            }
         }
     }
 
@@ -141,7 +207,6 @@ public class UserController {
         String id = request.getParameter("id");
         String account = request.getParameter("account");
         String oldPassword = Md5Util.EncoderByMd5(request.getParameter("oldPassword"));
-        String newPassword = Md5Util.EncoderByMd5(request.getParameter("newPassword"));
 
         Map<String, Object> map = new HashMap<>();
         map.put("id", id);
@@ -151,6 +216,7 @@ public class UserController {
         if (userList.size() != 1) {
             return ResultHandle.getFailResult("原密码错误");
         }
+        String newPassword = Md5Util.EncoderByMd5(request.getParameter("newPassword"));
         User user = new User();
         user.setId(Integer.parseInt(id));
         user.setAccount(account);
@@ -162,5 +228,38 @@ public class UserController {
         } else {
             return ResultHandle.getFailResult(res);
         }
+    }
+
+    @ApiOperation(value = "用户签到接口", notes = "用户签到接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String", paramType = "query")
+    })
+    @PostMapping("signed")
+    public Result signed(HttpServletRequest request) {
+        String id = request.getParameter("id");
+
+        //查询用户积分数量
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", Integer.parseInt(id));
+        List<Score> scoreList = scoreService.selectByConditionMap(map);
+        Score score = scoreList.get(scoreList.size() - 1);
+        Integer scoreTotal = Integer.parseInt(score.getScoreTotal());
+        scoreTotal += YZConstants.SIGNED_SCORE_NUMBER;
+        score.setScoreTotal(scoreTotal + "");
+        score.setId(score.getId() + 1);
+        score.setCreateTime(new Date());
+        score.setOperationNumber(YZConstants.SIGNED_SCORE_NUMBER + "");
+        score.setOperationSign(YZConstants.PLUS_SIGN);
+        score.setOperationDescribe("签到");
+
+        //新增用户积分操作记录
+        int i = scoreService.insert(score);
+
+        if (i != 1) {
+            return ResultHandle.getFailResult("签到失败");
+        } else {
+            return ResultHandle.getSuccessResult("签到成功");
+        }
+
     }
 }

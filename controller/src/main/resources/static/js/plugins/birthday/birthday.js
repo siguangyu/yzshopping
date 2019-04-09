@@ -1,4 +1,4 @@
-(function($){
+(function ($){
 $.extend({
 ms_DatePicker: function (options) {
             var defaults = {
@@ -23,7 +23,9 @@ ms_DatePicker: function (options) {
 
             // 年份列表
             var yearNow = new Date().getFullYear();
+            console.log($YearSelector)
 			var yearSel = $YearSelector.attr("rel");
+			console.log(yearSel)
             for (var i = yearNow; i >= 1900; i--) {
 				var sed = yearSel==i?"selected":"";
 				var yearStr = "<option value=\"" + i + "\" " + sed+">" + i + "</option>";
@@ -73,7 +75,7 @@ ms_DatePicker: function (options) {
                         default:
                             break;
                     }
-					
+
 					var daySel = $DaySelector.attr("rel");
                     for (var i = 1; i <= dayCount; i++) {
 						var sed = daySel==i?"selected":"";

@@ -80,5 +80,9 @@ app.controller('itemController',function($scope,$http){
 
 	}
 
+    $scope.logout = function () {
+        sessionStorage.clear();
+    }
+
 
 });

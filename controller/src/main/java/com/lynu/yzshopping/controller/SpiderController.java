@@ -37,11 +37,11 @@ public class SpiderController {
             @ApiImplicitParam(name = "page",value = "页码",required = false,dataType = "int",paramType = "query")
     })
     @GetMapping("/bijia")
-    public Result biJia(@RequestParam(value = "key", defaultValue = "") String key, @RequestParam(value = "page", defaultValue = "1") int pageNum) {
+    public Result biJia(@RequestParam(value = "key", defaultValue = "") String key, @RequestParam(value = "pageNo", defaultValue = "1") int pageNo) {
         // System.out.println("---------->>biJia" + key + "==>>" + pageNum);
         if ("".equals(key)||"undefined".equals(key))
             return ResultHandle.getFailResult("key can not be empty");
-        Map<String, Object> process = biBiJing.process(key, pageNum);
+        Map<String, Object> process = biBiJing.process(key, pageNo);
         return ResultHandle.getSuccessResult().setData(process);
     }
 }

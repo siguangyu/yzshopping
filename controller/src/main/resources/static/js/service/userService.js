@@ -10,8 +10,8 @@ app.service('userService',function($http){
 		return $http.get('../user/findPage.do?page='+page+'&rows='+rows);
 	}
 	//查询实体
-	this.findOne=function(id){
-		return $http.get('../user/findOne.do?id='+id);
+	this.selectByPrimaryKey=function(id){
+		return $http.get('../user/selectByPrimaryKey?id='+id);
 	}
 	//注册,添加用户
 	this.add=function(entity){
@@ -24,8 +24,9 @@ app.service('userService',function($http){
         return  $http.post('../user/login',entity );
     }
 	//修改 
-	this.update=function(entity){
-		return  $http.post('../user/update.do',entity );
+	this.updateUserInfo=function(entity){
+    	console.log(entity);
+		return  $http.post('../user/updateUserInfo',entity );
 	}
 	//删除
 	this.dele=function(ids){

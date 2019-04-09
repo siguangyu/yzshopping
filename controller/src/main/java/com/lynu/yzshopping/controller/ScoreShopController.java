@@ -1,8 +1,11 @@
 package com.lynu.yzshopping.controller;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.lynu.yzshopping.mybatis.entity.Goods;
 import com.lynu.yzshopping.service.constants.YZConstants;
 import com.lynu.yzshopping.mybatis.entity.Result;
 import com.lynu.yzshopping.mybatis.entity.Score;
@@ -22,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +44,6 @@ public class ScoreShopController {
 
     @Autowired
     UserService userService;
-
 
 
     @ApiOperation(value = "查询全部商品", notes = "查询全部商品")
@@ -99,7 +102,7 @@ public class ScoreShopController {
         Map<String, Object> map = new HashMap<>();
         map.put("score", score);
 
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         List<ScoreShop> scoreShopList = scoreShopService.selectByScore(map);
         //分页
         PageInfo<ScoreShop> pageInfo = new PageInfo<>(scoreShopList);
@@ -141,7 +144,7 @@ public class ScoreShopController {
             pageSize = Integer.parseInt(pageSizeStr);
         }
 
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         map.put("scoreTotal", scoreTotal);
 
         List<ScoreShop> scoreShopList = scoreShopService.selectAllByScoreAsc(map);
@@ -165,12 +168,33 @@ public class ScoreShopController {
         Integer userId = Integer.parseInt(request.getParameter("userId"));
         Integer goodsId = Integer.parseInt(request.getParameter("goodsId"));
 
-        Map<String,Object> map=new HashMap<>();
-        map.put("status",YZConstants.EXCHANGE_STATUS);
-        map.put("userId",userId);
-        map.put("goodsId",goodsId);
-        String res= scoreShopService.SaveOrExchangeShop(map);
+        Map<String, Object> map = new HashMap<>();
+        map.put("status", YZConstants.EXCHANGE_STATUS);
+        map.put("userId", userId);
+        map.put("goodsId", goodsId);
+        String res = scoreShopService.SaveOrExchangeShop(map);
         return ResultHandle.getSuccessResult(res);
     }
 
+    /*
+      * 收藏爬取的商品接口
+      * */
+    @ApiOperation(value = "收藏爬取的商品接口", notes = "收藏爬取的商品接口")
+    @PostMapping("save/good")
+    public Result scoreExchange(@RequestBody String jsonBody) {
+        JSONObject json = JSONObject.parseObject(jsonBody);
+        //把商品信息加入到goods表中
+        JSONObject item = json.getJSONObject("item");
+        Goods goods=new Goods();
+        goods.setPictureUrl((String)item.get("imgUrl"));
+        goods.setGoodName((String)item.get("title"));
+        goods.setPrice((String)item.get("price"));
+        goods.setGoodUrl((String) item.get("url"));
+        goods.setCreateTime(new Date());
+
+
+
+
+        return ResultHandle.getSuccessResult();
+    }
 }

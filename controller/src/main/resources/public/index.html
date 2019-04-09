@@ -19,12 +19,14 @@
     
 </head>
 
-<body ng-app="pinyougou" ng-controller="contentController" >
+<body ng-app="pinyougou" ng-controller="contentController" ng-init="getUserInfo()">
+
 	<!-- 头部栏位 -->
 	<!--页面顶部-->
 <div id="nav-bottom">
 	<!--顶部-->
 	<div class="nav-top">
+
 		<div class="top">
 			<div class="py-container">
 				<div class="shortcut">
@@ -32,11 +34,12 @@
 						<li class="f-item">悠哉购物欢迎您！</li>
 					</ul>
 					<ul class="fr">
-						<li id="userLoginShowFrame" class="f-item">请<a href="login.html" target="_blank">登录</a>　<span><a href="register.html" target="_blank">免费注册</a></span></li>
+						<li  id="userLoginShowFrame" class="f-item">请<a href="login.html" target="_top">登录</a>　<span><a href="register.html" target="_blank">免费注册</a></span></li>
+						<li  id="userName" class="f-item">{{userName}}<span><a href="../index.html" ng-click="logout()"  target="_top">退出登录</a></span></li>
 						<li class="f-item space"></li>
-						<li class="f-item">我的收藏</li>
+						<li class="f-item" >我的收藏</li>
 						<li class="f-item space"></li>
-						<li class="f-item">个人中心</li>
+						<li class="f-item"><a href="../home-index.html" >个人中心 </a></li>
 						<li class="f-item space"></li>
 						<li class="f-item">积分商城</li>
 						<li class="f-item space"></li>
@@ -67,32 +70,30 @@
 						<div class="hotwords">
 							<ul>
 								<li class="f-item">今日热门：</li>
-								<li class="f-item">童装</li>
-								<li class="f-item">雪纺裙</li>
-								<li class="f-item">小白裙</li>
-								<li class="f-item">手机</li>
-								<li class="f-item">链条包</li>
-								<li class="f-item">童装</li>
-								<li class="f-item">衬衣</li>
-								<li class="f-item">洗衣液</li>
+								<li class="f-item"><button style="background-color: transparent; border: 0;" ng-click="searchByHotKey('童装')">童装</button></li>
+								<li class="f-item"><button style="background-color: transparent; border: 0;" ng-click="searchByHotKey('雪纺裙')">雪纺裙</button></li>
+								<li class="f-item"><button style="background-color: transparent; border: 0;" ng-click="searchByHotKey('小白裙')">小白裙</button></li>
+								<li class="f-item"><button style="background-color: transparent; border: 0;" ng-click="searchByHotKey('手机')">手机</button></li>
+								<li class="f-item"><button style="background-color: transparent; border: 0;" ng-click="searchByHotKey('链条包')">链条包</button></li>
+								<li class="f-item"><button style="background-color: transparent; border: 0;" ng-click="searchByHotKey('衬衣')">衬衣</button></li>
+								<li class="f-item"><button style="background-color: transparent; border: 0;" ng-click="searchByHotKey('洗衣液')">洗衣液</button></li>
 							</ul>
 						</div>
 					</div>
-					<!--<div class="yui3-u Right shopArea">
+					<div class="yui3-u Right shopArea">
 						<div class="fr shopcar">
 							<div class="show-shopcar" id="shopcar">
 								<span class="car"></span>
-								<a class="sui-btn btn-default btn-xlarge" href="cart.html" target="_blank">
-									<span>我的购物车</span>
+								<a class="sui-btn btn-default btn-xlarge" href="#" target="_top">
+									<span>签到领好礼</span>
 									<i class="shopnum">0</i>
 								</a>
 								<div class="clearfix shopcarlist" id="shopcarlist" style="display:none">
-									<p>"啊哦，你的购物车还没有商品哦！"</p>
-									<p>"啊哦，你的购物车还没有商品哦！"</p>
+									<p>"啊哦，您今天还未签到！"</p>
 								</div>
 							</div>
 						</div>
-					</div>-->
+					</div>
 				</div>
 
 				<div class="yui3-g NavList">
@@ -782,7 +783,7 @@
 	<div class="fun">
 		<div class="py-container">
 			<div class="title">
-				<h3 class="fl">传智播客.有趣区</h3>
+				<h3 class="fl">悠哉购物.有趣区</h3>
 			</div>
 			<div class="clearfix yui3-g Interest">
 				<span class="x-line"></span>
@@ -1315,23 +1316,23 @@
 			<div class="toolbar-header"></div>
 
 			<!-- 侧栏按钮 -->
-			<div class="toolbar-tabs J-tab">
-				<div onclick="cartPanelView.tabItemClick('cart')" class="toolbar-tab tbar-tab-cart" data="购物车" tag="cart" >
-					<i class="tab-ico"></i>
-					<em class="tab-text"></em>
-					<span class="tab-sub J-count " id="tab-sub-cart-count">0</span>
-				</div>
-				<div onclick="cartPanelView.tabItemClick('follow')" class="toolbar-tab tbar-tab-follow" data="我的关注" tag="follow" >
-					<i class="tab-ico"></i>
-					<em class="tab-text"></em>
-					<span class="tab-sub J-count hide">0</span>
-				</div>
-				<div onclick="cartPanelView.tabItemClick('history')" class="toolbar-tab tbar-tab-history" data="我的足迹" tag="history" >
-					<i class="tab-ico"></i>
-					<em class="tab-text"></em>
-					<span class="tab-sub J-count hide">0</span>
-				</div>
-			</div>
+			<!--<div class="toolbar-tabs J-tab">-->
+				<!--<div onclick="cartPanelView.tabItemClick('cart')" class="toolbar-tab tbar-tab-cart" data="购物车" tag="cart" >-->
+					<!--<i class="tab-ico"></i>-->
+					<!--<em class="tab-text"></em>-->
+					<!--<span class="tab-sub J-count " id="tab-sub-cart-count">0</span>-->
+				<!--</div>-->
+				<!--<div onclick="cartPanelView.tabItemClick('follow')" class="toolbar-tab tbar-tab-follow" data="我的关注" tag="follow" >-->
+					<!--<i class="tab-ico"></i>-->
+					<!--<em class="tab-text"></em>-->
+					<!--<span class="tab-sub J-count hide">0</span>-->
+				<!--</div>-->
+				<!--<div onclick="cartPanelView.tabItemClick('history')" class="toolbar-tab tbar-tab-history" data="我的足迹" tag="history" >-->
+					<!--<i class="tab-ico"></i>-->
+					<!--<em class="tab-text"></em>-->
+					<!--<span class="tab-sub J-count hide">0</span>-->
+				<!--</div>-->
+			<!--</div>-->
 
 			<div class="toolbar-footer">
 				<div class="toolbar-tab tbar-tab-top" > <a href="#"> <i class="tab-ico  "></i> <em class="footer-tab-text">顶部</em> </a> </div>

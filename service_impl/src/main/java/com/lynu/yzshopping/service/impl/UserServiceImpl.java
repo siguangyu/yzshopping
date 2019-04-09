@@ -59,11 +59,11 @@ public class UserServiceImpl implements UserService {
         try{
             int i = userDao.updateByPrimaryKeySelective(user);
             if (i==1){
-                return "信息修改成功";
+                return "修改成功";
             }
-            return "修改信息出现错误";
+            return "修改出现错误";
         }catch (Exception e){
-            return "修改信息出现错误";
+            return "修改出现错误";
         }
     }
 }

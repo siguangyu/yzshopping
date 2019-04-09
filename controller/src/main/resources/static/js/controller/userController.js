@@ -1,5 +1,63 @@
-//控制层
-app.controller('userController', function ($scope, $controller, userService) {
+app.controller('userController', function ($scope, userService) {
+
+//修改个人信息
+    $scope.updateUserInfo=function(){
+
+        // $scope.entity.year =document.getElementById("select_year2").value;
+        // $scope.entity.month =document.getElementById("select_month2");
+        // $scope.entity.day =document.getElementById("select_day2");
+
+        // alert($scope.entity);
+        $scope.entity.id=sessionStorage.getItem("userId");
+        userService.updateUserInfo($scope.entity).success(
+            function(response){
+                alert(response.message);
+
+                if (response.code==200){
+                    //设置 sessionStorage中用户名的值
+                    console.log(response.data.username);
+                    sessionStorage.setItem("userName",response.data.username);
+                    location.reload();
+                }
+            }
+
+        );
+    }
+
+
+    //selectByPrimaryKey根据用户id查询用户信息
+    $scope.selectByPrimaryKey=function () {
+        var userId=sessionStorage.getItem("userId");
+        if(userId!=null){
+            userService.selectByPrimaryKey(userId).success(
+              function(response){
+                  $scope.userEntity=response;
+                  $scope.year=$scope.userEntity.data.year;
+                  // $scope.entity.year = $scope.year;
+                  $scope.month=$scope.userEntity.data.month;
+                  $scope.day=$scope.userEntity.data.day;
+
+                  var yearSel = document.getElementById("select_year2").options;
+
+                  yearSel[0].innerHTML = $scope.year
+                  yearSel[0].value = $scope.year
+
+                  var monthSel = document.getElementById("select_month2").options;
+                  monthSel[0].innerHTML = $scope.month
+                  monthSel[0].value = $scope.month
+
+                  var daySel = document.getElementById("select_day2").options;
+                  daySel[0].innerHTML = $scope.day
+                  daySel[0].value = $scope.day
+              }
+            );
+        }else {
+            alert("未登录");
+            window.location="../login.html";
+        }
+    }
+
+
     //注册
     $scope.reg = function () {
         if ($scope.entity.password != $scope.password) {
@@ -22,7 +80,8 @@ app.controller('userController', function ($scope, $controller, userService) {
 
         userService.login($scope.entity).success(
             function (response) {
-                alert(response.message);
+                // alert(response.message);
+                // console.log(response.message);
                 if (response.code == 200) {
                     //登录成功之后, 把个人信息存储到sessionStoreger中
                     var userName = response.data.userName;
@@ -36,19 +95,11 @@ app.controller('userController', function ($scope, $controller, userService) {
         );
     }
 
-    //发送验证码
-    /*$scope.sendCode=function(){
-        if($scope.entity.phone==null){
-            alert("请输入手机号！");
-            return ;
-        }
-        userService.sendCode($scope.entity.phone).success(
-            function(response){
-                alert(response.message);
-            }
-        );
+    $scope.logout = function () {
+        sessionStorage.clear();
     }
-*/
+
+
 
 
 });
