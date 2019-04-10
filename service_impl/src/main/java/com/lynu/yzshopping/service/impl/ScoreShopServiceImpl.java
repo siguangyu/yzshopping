@@ -111,7 +111,7 @@ public class ScoreShopServiceImpl implements ScoreShopService {
                 userGoodMapping.setStatus(status + "");
                 userGoodMapping.setCreateTime(new Date());
                 userGoodMappingDao.insert(userGoodMapping);
-                return "兑换成功，请选择收获地址！";
+                return "兑换成功！";
             } catch (Exception e) {
                 return "错误";
             }

@@ -18,6 +18,8 @@
 	<script type="text/javascript" src="js/controller/itemController.js">  </script>
 	<script type="text/javascript" src="js/service/contentService.js">  </script>
 	<script type="text/javascript" src="js/controller/contentController.js">  </script>
+	<script type="text/javascript" src="js/service/scoreShopService.js"></script>
+	<script type="text/javascript" src="js/controller/scoreShopController.js"></script>
 	<!--<script>
        //SKU商品列表
 	   var skuList=[    	    
@@ -49,7 +51,7 @@
     
 </head>
 
-<body  ng-app="pinyougou" ng-controller="itemController" ng-init="getItemDetail()">
+<body  ng-app="pinyougou" ng-controller="scoreShopController" ng-init="getItemDetail()">
 <!--getUserInfo()-->
 <!--getItemDetail()-->
 <!--页面顶部 开始-->
@@ -158,14 +160,14 @@
 						<!--默认第一个预览-->
 						<div id="preview" class="spec-preview">
 							<span class="jqzoom">
-									<img jqimg="{{item.imgUrl}}" src="{{item.imgUrl}}" width="400px" height="400px" />
+									<img jqimg="{{item.gImageUrl}}" src="{{item.gImageUrl}}" width="400px" height="400px" />
 							</span>
 						</div>
 					</div>
 				</div>
 				<div class="fr itemInfo-wrap">
 					<div class="sku-name">
-						<h4>{{item.title}}</h4>
+						<h4>{{item.gTitle}}</h4>
 					</div>
 					<!--<div class="news"><span>打折促销</span></div>-->
 					<div class="summary">
@@ -175,23 +177,23 @@
 							</div>
 							<div class="fl price">
 								<i>¥</i>
-								<em>{{item.price}}</em>
+								<em>{{item.gPrice}}</em>
 								<!--<span>降价通知</span>-->
 							</div>
 							<div class="fr remark">
-								<i>累计评价</i><em>{{item.comnum}}</em>
+								<i>剩余数量：</i><em>{{item.gNumber}}</em>
 							</div>
 						</div>
-						<div class="summary-wrap">
+						<!--<div class="summary-wrap">
 							<div class="fl title">
 								<i>店　　铺</i>
 							</div>
 							<div class="fl fix-width">
 								<i class="red-bg">{{item.domainCh}}</i><a href="{{item.serviceurl}}">{{item.service}}</a>
-								<!--<em class="t-gray">满999.00另加20.00元，或满1999.00另加30.00元，或满2999.00另加40.00元，即可在购物车换
-购热销商品</em>-->
+								&lt;!&ndash;<em class="t-gray">满999.00另加20.00元，或满1999.00另加30.00元，或满2999.00另加40.00元，即可在购物车换
+购热销商品</em>&ndash;&gt;
 							</div>
-						</div>
+						</div>-->
 					</div>
 
 					<div class="clearfix choose">
@@ -203,7 +205,8 @@
 									<li>
 										<!--<a  id="savegood" class="sui-btn  btn-danger addshopcar" ng-click="save()" style="display:block ">收藏</a>
 										<a  id="unsavegood" class="sui-btn  btn-danger addshopcar" ng-click="unsave()" style="display: none">取消收藏</a>
-										--><a   class="sui-btn  btn-danger addshopcar" href="{{item.url}}">前往购买</a>
+										-->
+										<a   class="sui-btn  btn-danger addshopcar"  ng-click="scoreExchange()" >兑换</a>
 									</li>
 								</ul>
 							</div>

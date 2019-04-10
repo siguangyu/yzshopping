@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Api(value = "用户接口", tags = "用户接口")
@@ -183,8 +185,8 @@ public class UserController {
             user.setUpdateTime(new Date());
             String res = userService.updateByPrimaryKeySelective(user);
             if (res.contains("成功")) {
-                Map<String,Object> map=new HashMap<>();
-                map.put("username",userService.selectByPrimaryKey(Integer.parseInt(id)).getUsername());
+                Map<String, Object> map = new HashMap<>();
+                map.put("username", userService.selectByPrimaryKey(Integer.parseInt(id)).getUsername());
                 return ResultHandle.getSuccessResult(res).setData(map);
             } else {
                 return ResultHandle.getFailResult(res);
@@ -234,32 +236,126 @@ public class UserController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String", paramType = "query")
     })
-    @PostMapping("signed")
+    @GetMapping("signed")
     public Result signed(HttpServletRequest request) {
+        //判断用户是否登录
         String id = request.getParameter("id");
-
+        if (StringUtils.isBlank(id)) {
+            return ResultHandle.getFailResult("未登录");
+        }
         //查询用户积分数量
         Map<String, Object> map = new HashMap<>();
         map.put("userId", Integer.parseInt(id));
         List<Score> scoreList = scoreService.selectByConditionMap(map);
         Score score = scoreList.get(scoreList.size() - 1);
-        Integer scoreTotal = Integer.parseInt(score.getScoreTotal());
-        scoreTotal += YZConstants.SIGNED_SCORE_NUMBER;
-        score.setScoreTotal(scoreTotal + "");
-        score.setId(score.getId() + 1);
-        score.setCreateTime(new Date());
-        score.setOperationNumber(YZConstants.SIGNED_SCORE_NUMBER + "");
-        score.setOperationSign(YZConstants.PLUS_SIGN);
-        score.setOperationDescribe("签到");
+        //获取用户操作积分的时间
+        Date time1 = score.getCreateTime();
 
-        //新增用户积分操作记录
-        int i = scoreService.insert(score);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //获取今天0点的时间
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, 0);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        String time2 = df.format(calendar.getTime());
+        boolean before = true;
+        try {
+            before = time1.after(df.parse(time2));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        if (i != 1) {
-            return ResultHandle.getFailResult("签到失败");
+        if (before) {//如果数据库里的时间小于今天零点
+            //则查询operation_describe是否为“签到”
+            if ("签到".equals(score.getOperationDescribe())) {
+                return ResultHandle.getFailResult("已签到");
+            }
+            //进行签到操作
+            Integer scoreTotal = Integer.parseInt(score.getScoreTotal());
+            scoreTotal += YZConstants.SIGNED_SCORE_NUMBER;
+            score.setScoreTotal(scoreTotal + "");
+            score.setId(score.getId() + 1);
+            score.setCreateTime(new Date());
+            score.setOperationNumber(YZConstants.SIGNED_SCORE_NUMBER + "");
+            score.setOperationSign(YZConstants.PLUS_SIGN);
+            score.setOperationDescribe("签到");
+
+            //新增用户积分操作记录
+            int i = scoreService.insert(score);
+
+            if (i != 1) {
+                return ResultHandle.getFailResult("签到失败");
+            } else {
+                return ResultHandle.getSuccessResult("签到成功");
+            }
         } else {
-            return ResultHandle.getSuccessResult("签到成功");
+            //如果数据库里的时间小于今天零点，证明今天未签到
+            //进行签到操作
+
+            Integer scoreTotal = Integer.parseInt(score.getScoreTotal());
+            scoreTotal += YZConstants.SIGNED_SCORE_NUMBER;
+            score.setScoreTotal(scoreTotal + "");
+            score.setId(score.getId() + 1);
+            score.setCreateTime(new Date());
+            score.setOperationNumber(YZConstants.SIGNED_SCORE_NUMBER + "");
+            score.setOperationSign(YZConstants.PLUS_SIGN);
+            score.setOperationDescribe("签到");
+
+            //新增用户积分操作记录
+            int i = scoreService.insert(score);
+
+            if (i != 1) {
+                return ResultHandle.getFailResult("签到失败");
+            } else {
+                return ResultHandle.getSuccessResult("签到成功");
+            }
         }
 
     }
+        @ApiOperation(value = "初始化界面时判断是否签到", notes = "初始化界面时判断是否签到")
+        @ApiImplicitParams({
+                @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String", paramType = "query")
+        })
+        @GetMapping("issigned")
+        public Result isSigned (HttpServletRequest request){
+            String id = request.getParameter("id");
+            if (StringUtils.isBlank(id)) {
+                return ResultHandle.getFailResult("未登录");
+            }
+            //查询用户积分数量
+            Map<String, Object> map = new HashMap<>();
+            map.put("userId", Integer.parseInt(id));
+            List<Score> scoreList = scoreService.selectByConditionMap(map);
+            Score score = scoreList.get(scoreList.size() - 1);
+            //获取用户操作积分的时间
+            Date time1 = score.getCreateTime();
+
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            //获取今天0点的时间
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.MONTH, 0);
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+            String time2 = df.format(calendar.getTime());
+            boolean before = true;
+            try {
+                before = time1.after(df.parse(time2));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (before) {//如果数据库里的时间小于今天零点
+                //则查询operation_describe是否为“签到”
+                if ("签到".equals(score.getOperationDescribe())) {
+                    return ResultHandle.getFailResult("已签到");
+                }
+            }
+
+            return ResultHandle.getSuccessResult("签到成功");
+        }
+
+
 }

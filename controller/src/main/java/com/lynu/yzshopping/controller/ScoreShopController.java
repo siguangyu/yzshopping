@@ -111,10 +111,10 @@ public class ScoreShopController {
 
 
     /*
-    * 根据用户id查询出积分总数，查询小于自己积分的商品
+    * 查询小于自己积分的商品
     * */
 
-    @ApiOperation(value = "根据用户id查询积分总数", notes = "根据用户id查询积分总数")
+    @ApiOperation(value = "查询小于自己积分的商品", notes = "查询小于自己积分的商品")
     @ApiImplicitParams(
             {
                     @ApiImplicitParam(name = "page", value = "页码", required = false, dataType = "int", paramType = "query"),
@@ -122,8 +122,8 @@ public class ScoreShopController {
                     @ApiImplicitParam(name = "userId", value = "用户id", required = true, dataType = "String", paramType = "query")
             }
     )
-    @PostMapping("selectScoreByUserId")
-    public Result selectScoreByUserId(HttpServletRequest request) {
+    @PostMapping("selectScoreShop")
+    public Result selectScoreShop(HttpServletRequest request) {
         //获取用户积分总数
         String pageStr = request.getParameter("page");
         String pageSizeStr = request.getParameter("pageSize");
@@ -153,6 +153,24 @@ public class ScoreShopController {
         return ResultHandle.getSuccessResult().setData(pageInfo);
     }
 
+    @ApiOperation(value = "根据用户id查询积分总数", notes = "根据用户id查询积分总数")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String", paramType = "query")
+            }
+    )
+    @GetMapping("selectScoreByUserId")
+    public Result selectScoreByUserId(HttpServletRequest request) {
+        //获取用户积分总数
+        String userIdStr = request.getParameter("id");
+        int userId = Integer.parseInt(userIdStr);
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        List<Score> scoreList = scoreService.selectByConditionMap(map);
+        Score score = scoreList.get(scoreList.size() - 1);
+        Integer scoreTotal = Integer.parseInt(score.getScoreTotal());
+        return ResultHandle.getSuccessResult().setData(scoreTotal);
+    }
     /*
     * 积分兑换商品接口
     * */
@@ -161,7 +179,7 @@ public class ScoreShopController {
             @ApiImplicitParam(name = "userId", value = "用户id", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "goodsId", value = "商品id", required = true, dataType = "String", paramType = "query")
     })
-    @PostMapping("score/exchange")
+    @GetMapping("score/exchange")
     public Result scoreExchange(HttpServletRequest request) {
 
         logger.info("====================积分兑换商品======================");
@@ -173,7 +191,11 @@ public class ScoreShopController {
         map.put("userId", userId);
         map.put("goodsId", goodsId);
         String res = scoreShopService.SaveOrExchangeShop(map);
-        return ResultHandle.getSuccessResult(res);
+        if (res.contains("成功")){
+            return ResultHandle.getSuccessResult(res);
+        }else{
+            return ResultHandle.getFailResult(res);
+        }
     }
 
     /*

@@ -2,6 +2,19 @@
 app.controller('itemController',function($scope,$http){
     $scope.specificationItems={};//记录用户选择的规格
 
+
+    $scope.save=function () {
+        document.getElementById("savegood").setAttribute("style","display:none");
+        document.getElementById("unsavegood").setAttribute("style","display:block");
+    }
+    $scope.unsave=function () {
+        document.getElementById("unsavegood").setAttribute("style","display:none");
+        document.getElementById("savegood").setAttribute("style","display:block");
+    }
+
+
+
+
 	$scope.getItemDetail=function () {
 		$scope.item=JSON.parse(sessionStorage.getItem("item"));
     }
