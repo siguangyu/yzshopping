@@ -2,7 +2,9 @@ package configration;
 
 
 import com.lynu.yzshopping.interceptor.FrequencyInterceptor;
+import com.lynu.yzshopping.util.FastJsonHttpMessageConverterEx;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -24,5 +26,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         // registry.addInterceptor(frequencyInterceptor).addPathPatterns("/user/**").excludePathPatterns("/user/login");
         // registry.addInterceptor(frequencyInterceptor).addPathPatterns("/hello/**");
         registry.addInterceptor(frequencyInterceptor).addPathPatterns("/data-interface/**");
+    }
+
+    @Bean
+    public FastJsonHttpMessageConverterEx fastJsonHttpMessageConverterEx() {
+        return new FastJsonHttpMessageConverterEx();
     }
 }

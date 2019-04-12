@@ -54,7 +54,7 @@ public class ScoreShopController {
             }
     )
     @PostMapping("selectAll")
-    public Result selectByPrimaryKey(HttpServletRequest request) {
+    public Result selectAll(HttpServletRequest request) {
         logger.info("====================条件查询开始====================");
         String pageStr = request.getParameter("page");
         String pageSizeStr = request.getParameter("pageSize");
@@ -83,7 +83,7 @@ public class ScoreShopController {
                     @ApiImplicitParam(name = "score", value = "积分范围", required = true, dataType = "String", paramType = "query")
             }
     )
-    @PostMapping("selectByScore")
+    @GetMapping("selectByScore")
     public Result selectByScore(HttpServletRequest request) {
         logger.info("====================根据积分进行范围查询======================");
         String pageStr = request.getParameter("page");
@@ -122,7 +122,7 @@ public class ScoreShopController {
                     @ApiImplicitParam(name = "userId", value = "用户id", required = true, dataType = "String", paramType = "query")
             }
     )
-    @PostMapping("selectScoreShop")
+    @GetMapping("selectScoreShop")
     public Result selectScoreShop(HttpServletRequest request) {
         //获取用户积分总数
         String pageStr = request.getParameter("page");
@@ -213,10 +213,38 @@ public class ScoreShopController {
         goods.setPrice((String)item.get("price"));
         goods.setGoodUrl((String) item.get("url"));
         goods.setCreateTime(new Date());
-
-
-
-
         return ResultHandle.getSuccessResult();
+    }
+
+    @ApiOperation(value = "根据id查询积分明细", notes = "根据id查询积分明细")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "page", value = "页码", required = false, dataType = "int", paramType = "query"),
+                    @ApiImplicitParam(name = "pageSize", value = "页大小", required = false, dataType = "int", paramType = "query"),
+                    @ApiImplicitParam(name = "userId", value = "用户id", required = true, dataType = "String", paramType = "query")
+            }
+    )
+    @GetMapping("selectScoreDetail")
+    public Result selectScoreDetail(HttpServletRequest request) {
+        Integer userId = Integer.parseInt(request.getParameter("userId"));
+        String pageStr = request.getParameter("page");
+        String pageSizeStr = request.getParameter("pageSize");
+        int page = YZConstants.PAGE;
+        int pageSize =10;
+        if (!StringUtils.isBlank(pageStr)) {
+            page = Integer.parseInt(pageStr);
+        }
+        if (!StringUtils.isBlank(pageSizeStr)) {
+            pageSize = Integer.parseInt(pageSizeStr);
+        }
+
+        Map<String,Object> map=new HashMap<>();
+        map.put("userId",userId);
+        String condition="order by id DESC";
+        map.put("condition",condition);
+        PageHelper.startPage(page, pageSize);
+        List<Score> scoreList = scoreService.selectByConditionMap(map);
+        PageInfo<Score> pageInfo = new PageInfo<>(scoreList);
+        return ResultHandle.getSuccessResult().setData(pageInfo);
     }
 }

@@ -4,7 +4,7 @@ app.controller("scoreShopController", function ($scope, scoreShopService,$window
     $scope.selectAll = function () {
         scoreShopService.selectAll().success(
             function (response) {
-                console.log(response);
+                // console.log(response);
                 $scope.resultMap = response;
 
             });
@@ -37,8 +37,8 @@ app.controller("scoreShopController", function ($scope, scoreShopService,$window
                alert("积分不足");
            }
             //积分足够，进行兑换
-          var res=$scope.exchange(userId,item.id);
-           alert(res);
+          $scope.exchange(userId,item.id);
+            alert("兑换成功");
         }
 
     }
@@ -59,19 +59,56 @@ app.controller("scoreShopController", function ($scope, scoreShopService,$window
                     console.log(item);
                   var gNumber=item.gNumber;
                   item.gNumber=gNumber-1;
-                  alert(item.gNumber);
+                  // alert(item.gNumber);
                   item= JSON.stringify(item);
                    sessionStorage.setItem("item",item);
                     $window.location.reload();
-                    return "兑换成功!"
+
                 }
             });
     }
-    /*   var i=1;
-   $scope.testReload=function () {
-       //测试刷新
 
-       $window.location.reload();
-       console.log(i++);
-   }*/
+/*积分详情*/
+    $scope.scoreDetail = function (page){
+        var userId=sessionStorage.getItem("userId");
+        if (userId==null){
+            alert("请登录！");
+            window.location = "../login.html";
+        }
+        scoreShopService.scoreDetail(userId,page).success(
+            function (response) {
+                $scope.scoreList=response;
+            }
+        )
+
+    }
+
+    $scope.selectScoreShop=function(page){
+        var userId=sessionStorage.getItem("userId");
+        if (userId==null){
+            alert("请登录！");
+            window.location = "../login.html";
+        }
+            scoreShopService.selectScoreShop(userId,page).success(
+                function (response) {
+                    $scope.resultMap=response;
+                });
+        }
+    $scope.selectByScore=function(page,num){
+       var ul= document.getElementById("one").getElementsByTagName("li");
+       var score=ul[num].getAttribute("value");
+        scoreShopService.selectByScore(page,score).success(
+            function (response) {
+                $scope.resultMap=response;
+            });
+    }
+    /*$scope.selectByScoreTwo=function(page){
+        var score= document.getElementById("two").text;
+        scoreShopService.selectByScore(page,score).success(
+            function (response) {
+                $scope.resultMap=response;
+            });
+    }*/
+
+
 });

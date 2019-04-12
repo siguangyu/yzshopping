@@ -66,11 +66,14 @@ app.controller('userController', function ($scope, userService) {
         }
         userService.add($scope.entity).success(
             function (response) {
-                alert(response.message+"!去登陆");
+
                 if (response.code==200){
+                    alert("注册成功！积分+10！",response.message+"!去登陆");
                     window.location="../login.html";
                 }
-                //注册成功之后，把
+                else{
+                    alert("请正确输入！");
+                }
             }
         );
     }

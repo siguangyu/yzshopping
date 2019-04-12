@@ -64,14 +64,16 @@ app.controller("contentController", function ($scope, contentService) {
                 function(response){
                     console.log(response);
                     if ("400"==response.code){
-                        document.getElementById("signed").innerHTML = "已签到";
+                        // console.log(22222)
+                        document.getElementById("signed").innerText = "签到领好礼";
                     }else {
-                        document.getElementById("signed").innerHTML = "签到领好礼";
+                        // console.log(1111)
+                        document.getElementById("signed").innerText = "已签到";
                     }
 
                 });
         }else {
-            document.getElementById("signed").innerHTML = "签到领好礼";
+            document.getElementById("signed").innerText = "签到领好礼";
         }
     }
 

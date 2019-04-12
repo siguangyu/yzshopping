@@ -5,6 +5,7 @@ import com.lynu.yzshopping.service.UserService;
 import com.lynu.yzshopping.dao.UserDao;
 import com.lynu.yzshopping.mybatis.entity.User;
 import com.lynu.yzshopping.util.Md5Util;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,8 +38,14 @@ public class UserServiceImpl implements UserService {
         JSONObject jsonObject = JSONObject.parseObject(jsonBody);
         User user=new User();
         String account=jsonObject.getString("account");
+        if (StringUtils.isBlank(account)){
+            return 0;
+        }
         //使用Md5对密码进行加密处理
         String password= Md5Util.EncoderByMd5(jsonObject.getString("password"));
+        if (StringUtils.isBlank(password)){
+            return 0;
+        }
         //根据时间戳来设置用户初始昵称
         String username=jsonObject.getString("username");
         if (username==null||username==""){

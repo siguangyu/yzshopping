@@ -9,5 +9,15 @@ app.service("scoreShopService",function($http){
     this. exchange=function (userId,goodsId) {
         return $http.get("user/scoreShop/score/exchange?userId="+userId+"&goodsId="+goodsId);
     }
+    this. scoreDetail=function (userId,page) {
+        return $http.get("user/scoreShop/selectScoreDetail?userId="+userId+"&page="+page);
+    }
+    this. selectScoreShop=function (userId,page) {
+        return $http.get("user/scoreShop/selectScoreShop?userId="+userId+"&page="+page);
+    }
+    this. selectByScore=function (page,score) {
+        return $http.get("user/scoreShop/selectByScore?page="+page+"&score="+score);
+    }
+
 
 });

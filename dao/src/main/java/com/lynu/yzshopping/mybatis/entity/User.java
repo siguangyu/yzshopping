@@ -1,6 +1,9 @@
 package com.lynu.yzshopping.mybatis.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class User implements Serializable{
@@ -74,6 +77,7 @@ public class User implements Serializable{
      *
      * @mbggenerated Wed Mar 27 14:38:58 CST 2019
      */
+
     private Date createTime;
 
     /**
@@ -284,6 +288,7 @@ public class User implements Serializable{
      *
      * @mbggenerated Wed Mar 27 14:38:58 CST 2019
      */
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -297,6 +302,7 @@ public class User implements Serializable{
      * @mbggenerated Wed Mar 27 14:38:58 CST 2019
      */
     public void setCreateTime(Date createTime) {
+        new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(createTime);
         this.createTime = createTime;
     }
 

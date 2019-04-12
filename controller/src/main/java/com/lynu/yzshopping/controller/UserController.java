@@ -44,6 +44,15 @@ public class UserController {
             //返回值为自增主键id
             int i = userService.insertSelective(jsonBody);
             if (i != 0) {
+                //注册成功,为用户增加积分
+                Score score=new Score();
+                score.setUserId(i);
+                score.setScoreTotal("10");  //新用户积分为10
+                score.setOperationSign("1"); //1为+，2为-
+                score.setOperationNumber("10");//操作数量为奖励的10分
+                score.setOperationDescribe("注册用户"); //操作描述为  注册用户
+                score.setCreateTime(new Date());
+                scoreService.insert(score);
                 User user = userService.selectByPrimaryKey(i);
                 Map<String, Object> map = new HashMap<>();
                 map.put("userId", i);
@@ -247,7 +256,11 @@ public class UserController {
         Map<String, Object> map = new HashMap<>();
         map.put("userId", Integer.parseInt(id));
         List<Score> scoreList = scoreService.selectByConditionMap(map);
+        if (scoreList.size()==0){
+            return ResultHandle.getFailResult();
+        }
         Score score = scoreList.get(scoreList.size() - 1);
+
         //获取用户操作积分的时间
         Date time1 = score.getCreateTime();
 
@@ -267,10 +280,10 @@ public class UserController {
             e.printStackTrace();
         }
 
-        if (before) {//如果数据库里的时间小于今天零点
+        if (before) {//如果数据库里的时间大于今天零点
             //则查询operation_describe是否为“签到”
             if ("签到".equals(score.getOperationDescribe())) {
-                return ResultHandle.getFailResult("已签到");
+                return ResultHandle.getSuccessResult("已签到");
             }
             //进行签到操作
             Integer scoreTotal = Integer.parseInt(score.getScoreTotal());
@@ -328,6 +341,9 @@ public class UserController {
             Map<String, Object> map = new HashMap<>();
             map.put("userId", Integer.parseInt(id));
             List<Score> scoreList = scoreService.selectByConditionMap(map);
+            if (scoreList.size()==0){
+                return ResultHandle.getFailResult();
+            }
             Score score = scoreList.get(scoreList.size() - 1);
             //获取用户操作积分的时间
             Date time1 = score.getCreateTime();
@@ -347,14 +363,14 @@ public class UserController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (before) {//如果数据库里的时间小于今天零点
+            if (before) {//如果数据库里的时间大于今天零点
                 //则查询operation_describe是否为“签到”
                 if ("签到".equals(score.getOperationDescribe())) {
-                    return ResultHandle.getFailResult("已签到");
+                    return ResultHandle.getSuccessResult("已签到");
                 }
             }
 
-            return ResultHandle.getSuccessResult("签到成功");
+            return ResultHandle.getFailResult("未签到");
         }
 
 
