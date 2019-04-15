@@ -10,6 +10,9 @@ app.controller("contentController", function ($scope, contentService) {
         }*/
     //搜索跳转
     $scope.search = function () {
+        if ($scope.key=='undefined'||$scope.key==null){
+            $scope.key=document.getElementById("autocomplete").getAttribute("placeholder");
+        }
         location.href = "../search.html#?key=" + $scope.key;
     }
 
@@ -21,6 +24,12 @@ app.controller("contentController", function ($scope, contentService) {
     $scope.getUserInfo = function () {
         $scope.userName = sessionStorage.getItem("userName");
         $scope.userId = sessionStorage.getItem("userId");
+        if ($scope.userName=="undefined"){
+            sessionStorage.removeItem("userName");
+        }
+        if ($scope.userId=="undefined"){
+            sessionStorage.removeItem("userId");
+        }
         if ($scope.userName != null) {
             document.getElementById("userLoginShowFrame").setAttribute("style","display:none");
             document.getElementById("userName").setAttribute("style","display:block");
@@ -31,7 +40,7 @@ app.controller("contentController", function ($scope, contentService) {
         }
 
     }
-    //搜索跳转
+    //退出
     $scope.logout = function () {
         sessionStorage.clear();
     }
@@ -45,6 +54,9 @@ app.controller("contentController", function ($scope, contentService) {
                     console.log(response);
                     if ("400"==response.code){
                             document.getElementById("signed").innerHTML = "已签到";
+                            // alert("签到成功！积分+2");
+                        // document.getElementById("signed").attr("disabled",true).css("pointer-events","none");
+
                     }else {
                         document.getElementById("signed").innerHTML = "签到领好礼";
                     }
@@ -69,6 +81,8 @@ app.controller("contentController", function ($scope, contentService) {
                     }else {
                         // console.log(1111)
                         document.getElementById("signed").innerText = "已签到";
+                        // document.getElementById("signed").setAttribute("style","pointer-events:none");
+                        // attr("disabled",true).css("pointer-events","none");
                     }
 
                 });

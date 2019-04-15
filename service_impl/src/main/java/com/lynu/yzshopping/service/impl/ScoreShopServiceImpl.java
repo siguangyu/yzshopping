@@ -69,7 +69,7 @@ public class ScoreShopServiceImpl implements ScoreShopService {
     @Transactional(rollbackFor = Exception.class)
     public String SaveOrExchangeShop(Map<String, Object> map) {
         Integer userId = (Integer) map.get("userId");
-        Integer goodsId = (Integer) map.get("goodsId");
+        Integer goodsId = (Integer) map.get("id");
         Integer status = (Integer) map.get("status");
 
         if (status == YZConstants.EXCHANGE_STATUS) {//兑换商品

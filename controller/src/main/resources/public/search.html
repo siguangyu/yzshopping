@@ -36,15 +36,15 @@
                     <ul class="fr">
                         <li  id="userLoginShowFrame" class="f-item">请<a href="login.html" target="_top">登录</a>　<span><a href="register.html" target="_blank">免费注册</a></span></li>
                         <li  id="userName" class="f-item">{{userName}}<span><a href="../index.html" ng-click="logout()"  target="_top">退出登录</a></span></li>
-                        <li class="f-item space"></li>
-                        <li class="f-item" >我的收藏</li>
+                       <!-- <li class="f-item space"></li>
+                        <li class="f-item" >我的收藏</li>-->
                         <li class="f-item space"></li>
                         <li class="f-item"><a href="../home-index.html" >个人中心 </a></li>
                         <li class="f-item space"></li>
-                        <li class="f-item">积分商城</li>
+                        <li class="f-item"><a href="../score_shop.html" >积分商城</a></li>
                         <li class="f-item space"></li>
                         <li class="f-item">帮助中心</li>
-                        <li class="f-item space"></li>
+
                     </ul>
                 </div>
             </div>
@@ -233,9 +233,10 @@
                 </div>-->
             </div>
             <div class="goods-list">
+                <span style="text-align: center" id="error"> 抱歉，未搜索到该商品，您可以尝试更换搜索关键字或者重新加载 </span>
                 <ul class="yui3-g">
                     <li class="yui3-u-1-5" ng-repeat="item in resultMap.data.page">
-                        <div class="list-wrap">
+                        <div class="list-wrap" >
                             <div class="p-img">
                                 <a href="../detail.html" target="_blank" ng-click="putItem(item)">
                                     <img src="{{item.imgUrl}}"/></a>
@@ -267,7 +268,9 @@
             <div class="fr page">
                 <div class="sui-pagination pagination-large">
                     <ul>
-
+                        <li class="prev {{isTopPage()?'disabled':''}}"><a href="#"
+                                                                          ng-click="queryByPage(1)">首页</a>
+                        </li>
                         <li class="prev {{isTopPage()?'disabled':''}}"><a href="#"
                                                                           ng-click="queryByPage(searchMap.pageNo-1)">«</a>
                         </li>
@@ -278,12 +281,11 @@
                                                                           ng-click="queryByPage(searchMap.pageNo+1)">»</a>
                         </li>
                     </ul>
-                    <div>
-                        <span>共{{resultMap.totalPages}}页&nbsp;</span><span> 到第 <input type="text"
-                                                                                      class="page-num"
-                                                                                      ng-model="searchMap.pageNo"> 页
+                  <!--  <div >
+                        <span>共{{resultMap.data.page.length}}页&nbsp;</span>
+                        <span> 到第<input type="text" class="page-num" ng-model="searchMap.pageNo"> 页
 								<button class="page-confirm" ng-click="queryByPage(searchMap.pageNo)">确定</button></span>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -370,7 +372,7 @@
 <div class="clearfix footer">
     <div class="py-container">
         <div class="footlink">
-            <div class="Mod-service">
+            <!--<div class="Mod-service">
                 <ul class="Mod-Service-list">
                     <li class="grid-service-item intro  intro1"><i
                             class="serivce-item fl"></i>
@@ -408,7 +410,7 @@
                         </div>
                     </li>
                 </ul>
-            </div>
+            </div>-->
             <div class="clearfix Mod-list">
                 <div class="yui3-g">
                     <div class="yui3-u-1-6">
@@ -481,8 +483,7 @@
                     <li>友情链接<span class="space"></span></li>
                     <li>关于我们</li>
                 </ul>
-                <p>地址：北京市昌平区建材城西路金燕龙办公楼一层 邮编：100096 电话：400-618-4000
-                    传真：010-82935100</p>
+                <p>地址：河南省洛阳市洛阳师范学院信息技术学院移动一班 邮编：461400 电话：400-618-4000 传真：010-82935100</p>
                 <p>京ICP备08001421号京公网安备110108007702</p>
             </div>
         </div>

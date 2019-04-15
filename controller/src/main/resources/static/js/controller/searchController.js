@@ -24,8 +24,15 @@ app.controller('searchController', function ($scope, $location, searchService) {
         $scope.searchMap.pageNo = parseInt($scope.searchMap.pageNo);
         searchService.search($scope.key,$scope.searchMap.pageNo).success(
             function (response) {
-            $scope.resultMap = response;// 搜索返回的结果
-            buildPageLabel();// 调用分页方法，产生页码数据
+                $scope.resultMap = response;// 搜索返回的结果
+                console.log( $scope.resultMap.data.page.length);
+                if (response.data!=null){
+                    document.getElementById("error").style.display="none";
+                }else{
+                    //没有搜索结果，显示错误页
+                    document.getElementById("error").style.display="";
+                }
+                buildPageLabel();// 调用分页方法，产生页码数据
         });
 
     }
@@ -96,7 +103,7 @@ app.controller('searchController', function ($scope, $location, searchService) {
     // 根据页码查询
     $scope.queryByPage = function (pageNo) {
         // 页码验证
-        if (pageNo < 1 || pageNo > $scope.resultMap.totalPages) {
+        if (pageNo < 1 || pageNo > $scope.resultMap.data.page.size) {
             return;
         }
         $scope.searchMap.pageNo = pageNo;

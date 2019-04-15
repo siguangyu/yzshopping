@@ -37,8 +37,24 @@ app.controller("scoreShopController", function ($scope, scoreShopService,$window
                alert("积分不足");
            }
             //积分足够，进行兑换
-          $scope.exchange(userId,item.id);
-            alert("兑换成功");
+          // $scope.exchange(userId,item.id);
+
+            scoreShopService.exchange(userId,item.id).success(
+                function (response) {
+                    if (response.code==200){
+                        var item =JSON.parse(sessionStorage.getItem("item"));
+                        console.log(item);
+                        var gNumber=item.gNumber;
+                        item.gNumber=gNumber-1;
+                        // alert(item.gNumber);
+                        item= JSON.stringify(item);
+                        sessionStorage.setItem("item",item);
+                        alert("兑换成功");
+                        $window.location.reload();
+                    }else{
+                        alert(response.message);
+                    }
+                });
         }
 
     }

@@ -244,7 +244,7 @@ ul.logo-list li {
 	display: inline-block;
 	*display: inline;
 	*zoom: 1;
-	width: 490px;
+	width: 520px;
 	float: left
 }
 
@@ -283,7 +283,7 @@ ul.logo-list li {
 }
 
 .pagination-large div .page-num {
-	padding: 9px 18px
+	/*padding: 9px 18px*/
 }
 
 .pagination-large div .page-num+.page-confirm {

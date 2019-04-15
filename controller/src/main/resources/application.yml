@@ -22,6 +22,11 @@ spring:
         testOnReturn: false
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
+    http:
+        encoding:
+            force: true
+            charset: utf-8
+            enabled: true
 mybatis:
 #对应实体类的路径 和 mapper映射文件xml的路径
     typeAliasesPackage: com.eiis.mybatis.entity

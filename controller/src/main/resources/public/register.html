@@ -142,7 +142,7 @@
 		// var isCheckCode=true;
 	
 		function createCode(){
-            var code = '' ; //在全局定义验证码
+             code = '' ; //在全局定义验证码
 //		code = "8888";
 			var checkCode = document.getElementById("code");
 		var codeLength = 4;//验证码的长度
@@ -182,7 +182,8 @@
 		function isCode(){
 			var inputCode = document.getElementById("input").value.toUpperCase(); //取得输入的验证码并转化为大写
 			if(inputCode.length == 4) { //若输入的验证码长度为4
-				if (inputCode==code){
+                console.log(code);
+                if (inputCode==code){
 					// isCheckCode=false;
 					// console.log(isCheckCode);
 					var remove=registerButton.getAttributeNode("disabled");

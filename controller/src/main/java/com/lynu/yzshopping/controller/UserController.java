@@ -146,12 +146,12 @@ public class UserController {
     public Result updateUserInfo(@RequestBody String jsonBody) {
         JSONObject json = JSONObject.parseObject(jsonBody);
         String id = (String) json.get("id");
-        String account = (String) json.get("account");
+//        String account = (String) json.get("account");
         String oldPassword = Md5Util.EncoderByMd5((String) json.get("oldPassword"));
-        if (!StringUtils.isBlank(account) && !StringUtils.isBlank(oldPassword)) {
+        if ( !StringUtils.isBlank(oldPassword)) {
             Map<String, Object> map = new HashMap<>();
             map.put("id", id);
-            map.put("account", account);
+//            map.put("account", account);
             map.put("password", oldPassword);
             List<User> userList = userService.selectByConditionMap(map);
             if (userList.size() != 1) {
@@ -160,7 +160,7 @@ public class UserController {
             String newPassword = Md5Util.EncoderByMd5((String) json.get("newPassword"));
             User user = new User();
             user.setId(Integer.parseInt(id));
-            user.setAccount(account);
+//            user.setAccount(account);
             user.setPassword(newPassword);
             user.setUpdateTime(new Date());
             String res = userService.updateByPrimaryKeySelective(user);
@@ -207,7 +207,7 @@ public class UserController {
     @ApiOperation(value = "安全信息修改接口", notes = "安全信息修改接口")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "account", value = "账户", required = true, dataType = "String", paramType = "query"),
+//            @ApiImplicitParam(name = "account", value = "账户", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "oldPassword", value = "原来的密码", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "newPassword", value = "新密码", required = true, dataType = "String", paramType = "query")
 
@@ -216,12 +216,12 @@ public class UserController {
     public Result updateUserSafeInfo(HttpServletRequest request) {
 
         String id = request.getParameter("id");
-        String account = request.getParameter("account");
+//        String account = request.getParameter("account");
         String oldPassword = Md5Util.EncoderByMd5(request.getParameter("oldPassword"));
 
         Map<String, Object> map = new HashMap<>();
         map.put("id", id);
-        map.put("account", account);
+//        map.put("account", account);
         map.put("password", oldPassword);
         List<User> userList = userService.selectByConditionMap(map);
         if (userList.size() != 1) {
@@ -230,7 +230,7 @@ public class UserController {
         String newPassword = Md5Util.EncoderByMd5(request.getParameter("newPassword"));
         User user = new User();
         user.setId(Integer.parseInt(id));
-        user.setAccount(account);
+//        user.setAccount(account);
         user.setPassword(newPassword);
         user.setUpdateTime(new Date());
         String res = userService.updateByPrimaryKeySelective(user);
@@ -283,25 +283,27 @@ public class UserController {
         if (before) {//如果数据库里的时间大于今天零点
             //则查询operation_describe是否为“签到”
             if ("签到".equals(score.getOperationDescribe())) {
-                return ResultHandle.getSuccessResult("已签到");
+                return ResultHandle.getFailResult("已签到");
             }
             //进行签到操作
             Integer scoreTotal = Integer.parseInt(score.getScoreTotal());
             scoreTotal += YZConstants.SIGNED_SCORE_NUMBER;
-            score.setScoreTotal(scoreTotal + "");
-            score.setId(score.getId() + 1);
-            score.setCreateTime(new Date());
-            score.setOperationNumber(YZConstants.SIGNED_SCORE_NUMBER + "");
-            score.setOperationSign(YZConstants.PLUS_SIGN);
-            score.setOperationDescribe("签到");
+            Score sc=new Score();
+            sc.setUserId(score.getUserId());
+            sc.setScoreTotal(scoreTotal + "");
+//            score.setId(score.getId() + 1);
+            sc.setCreateTime(new Date());
+            sc.setOperationNumber(YZConstants.SIGNED_SCORE_NUMBER + "");
+            sc.setOperationSign(YZConstants.PLUS_SIGN);
+            sc.setOperationDescribe("签到");
 
             //新增用户积分操作记录
-            int i = scoreService.insert(score);
+            int i = scoreService.insert(sc);
 
             if (i != 1) {
-                return ResultHandle.getFailResult("签到失败");
+                return ResultHandle.getSuccessResult("签到失败");
             } else {
-                return ResultHandle.getSuccessResult("签到成功");
+                return ResultHandle.getFailResult("签到成功");
             }
         } else {
             //如果数据库里的时间小于今天零点，证明今天未签到
@@ -309,15 +311,17 @@ public class UserController {
 
             Integer scoreTotal = Integer.parseInt(score.getScoreTotal());
             scoreTotal += YZConstants.SIGNED_SCORE_NUMBER;
-            score.setScoreTotal(scoreTotal + "");
-            score.setId(score.getId() + 1);
-            score.setCreateTime(new Date());
-            score.setOperationNumber(YZConstants.SIGNED_SCORE_NUMBER + "");
-            score.setOperationSign(YZConstants.PLUS_SIGN);
-            score.setOperationDescribe("签到");
+            Score sc=new Score();
+            sc.setScoreTotal(scoreTotal + "");
+            sc.setUserId(score.getUserId());
+//            sc.setId(score.getId() + 1);
+            sc.setCreateTime(new Date());
+            sc.setOperationNumber(YZConstants.SIGNED_SCORE_NUMBER + "");
+            sc.setOperationSign(YZConstants.PLUS_SIGN);
+            sc.setOperationDescribe("签到");
 
             //新增用户积分操作记录
-            int i = scoreService.insert(score);
+            int i = scoreService.insert(sc);
 
             if (i != 1) {
                 return ResultHandle.getFailResult("签到失败");

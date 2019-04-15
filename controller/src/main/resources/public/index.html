@@ -36,15 +36,15 @@
 					<ul class="fr">
 						<li  id="userLoginShowFrame" class="f-item">请<a href="login.html" target="_top">登录</a>　<span><a href="register.html" target="_blank">免费注册</a></span></li>
 						<li  id="userName" class="f-item">{{userName}}<span><a href="../index.html" ng-click="logout()"  target="_top">退出登录</a></span></li>
-						<li class="f-item space"></li>
-						<li class="f-item" >我的收藏</li>
+						<!--<li class="f-item space"></li>
+						<li class="f-item" >我的收藏</li>-->
 						<li class="f-item space"></li>
 						<li class="f-item"><a href="../home-index.html" >个人中心 </a></li>
 						<li class="f-item space"></li>
 						<li class="f-item"><a href="../score_shop.html" >积分商城</a></li>
 						<li class="f-item space"></li>
 						<li class="f-item">帮助中心</li>
-						<li class="f-item space"></li>
+
 					</ul>
 				</div>
 			</div>
@@ -62,7 +62,7 @@
 							<form action="" class="sui-form form-inline">
 								<!--searchAutoComplete-->
 								<div class="input-append">
-									<input type="text" id="autocomplete" type="text" class="input-error input-xxlarge"  ng-model="key"/>
+									<input type="text" id="autocomplete" type="text" class="input-error input-xxlarge" placeholder="华为 mate10" ng-model="key"/>
 									<button class="sui-btn btn-xlarge btn-danger" type="button" ng-click="search()">搜索</button>
 								</div>
 							</form>
@@ -84,7 +84,7 @@
 						<div class="fr shopcar">
 							<div class="show-shopcar" id="shopcar">
 								<span class="car"></span>
-								<a class="sui-btn btn-default btn-xlarge" href="#" ng-click="signed()" target="_top">
+								<a class="sui-btn btn-default btn-xlarge"  href="#" ng-click="signed()" target="_top">
 									<span id="signed">签到领好礼</span>
 									<!--<i class="shopnum">0</i>-->
 								</a>
@@ -97,7 +97,7 @@
 					<div class="yui3-u Left all-sort">
 						<h4>全部商品分类</h4>
 					</div>
-					<div class="yui3-u Center navArea">
+					<!--<div class="yui3-u Center navArea">
 						<ul class="nav">
 							<li class="f-item">服装城</li>
 							<li class="f-item">美妆馆</li>
@@ -106,9 +106,9 @@
 							<li class="f-item">闪购</li>
 							<li class="f-item">团购</li>
 							<li class="f-item">有趣</li>
-							<!--<li class="f-item"><a href="seckill-index.html" target="_blank">秒杀</a></li>-->
+							&lt;!&ndash;<li class="f-item"><a href="seckill-index.html" target="_blank">秒杀</a></li>&ndash;&gt;
 						</ul>
-					</div>
+					</div>-->
 					<div class="yui3-u Right"></div>
 				</div>
 			</div>
@@ -124,239 +124,266 @@
 				<div class="yui3-u Left all-sort-list">
 					<div class="all-sort-list2">
 						<div class="item bo">
-							<h3><a href="">图书、音像、数字商品</a></h3>
+							<h3><a href="javascript:void(0)">图书、音像、数字商品</a></h3>
 							<div class="item-list clearfix">
 								<div class="subitem">
 									<dl class="fore1">
-										<dt><a href="">电子书</a></dt>
-										<dd><a href="">免费</a><a href="">小说</a></em><a href="">励志与成功</a><em><a href="">婚恋/两性</a></em><em><a href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('电子书')">电子书</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('免费小说')">免费小说</a></em>
+											<a href="javascript:void(0)"  ng-click="searchByHotKey('网络小说')">网络小说</a>
+										</dd>
 									</dl>
-									<dl class="fore2">
+									<!--<dl class="fore2">
 										<dt><a href="">数字音乐</a></dt>
 										<dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a href="">有声读物</a></em></dd>
-									</dl>
+									</dl>-->
 									<dl class="fore3">
-										<dt><a href="">音像</a></dt>
-										<dd><em><a href="">音乐</a></em><em><a href="">影视</a></em><em><a href="">教育音像</a></em><em><a href="">游戏</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('音像')">音像</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('音乐')">音乐</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('影视')">影视</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('游戏')">游戏</a></em></dd>
 									</dl>
 									<dl class="fore4">
-										<dt>文艺</dt>
-										<dd><em><a href="">小说</a></em><em><a href="">文学</a></em><em><a href="">青春文学</a></em><em><a href="">传记</a></em><em><a href="">艺术</a></em></dd>
-									</dl>
-									<dl class="fore5">
-										<dt>人文社科</dt>
-										<dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a href="">社会科学</a></em></dd>
-									</dl>
-									<dl class="fore6">
-										<dt>经管励志</dt>
-										<dd><em><a href="">经济</a></em><em><a href="">金融与投资</a></em><em><a href="">管理</a></em><em><a href="">励志与成功</a></em></dd>
-									</dl>
-									<dl class="fore7">
-										<dt>生活</dt>
-										<dd><em><a href="">家庭与育儿</a></em><em><a href="">旅游/地图</a></em><em><a href="">烹饪/美食</a></em><em><a href="">时尚/美妆</a></em><em><a href="">家居</a></em><em><a href="">婚恋与两性</a></em><em><a href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a href="">动漫/幽默</a></em><em><a href="">体育/运动</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('经典文学')">经典文学</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('文学奖')">文学奖</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('青春文学')">青春文学</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('传记')">传记</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('语录')">语录</a></em></dd>
 									</dl>
 								</div>
 							</div>
 						</div>
 						<div class="item">
-							<h3><a href="">家用电器</a></h3>
+							<h3><a href="javascript:void(0)">家用电器</a></h3>
 							<div class="item-list clearfix">
 								<div class="subitem">
 									<dl class="fore1">
-										<dt><a href="">电子书1</a></dt>
-										<dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('大家电')">大家电</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('冰箱')">冰箱</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('液晶电视')">液晶电视</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('洗衣机')">洗衣机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('热水器')">热水器</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('中央空调')">中央空调</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('空调')">空调</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('音响')">音响</a></em></dd>
 									</dl>
 									<dl class="fore2">
-										<dt><a href="">数字音乐</a></dt>
-										<dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a href="">有声读物</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('生活电器')">生活电器</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('取暖电器')">取暖电器</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('净化器')">净化器</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('电话机')">电话机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('吸尘器')">吸尘器</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('饮水机')">饮水机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('挂烫机')">挂烫机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('熨斗')">熨斗</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('加湿器')">加湿器</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('除湿机')">除湿机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('干衣机')">干衣机</a></em>
+										</dd>
+									</dl>
+
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<h3><a href="javascript:void(0)">手机、数码</a></h3>
+							<div class="item-list clearfix">
+								<div class="subitem">
+									<dl class="fore1">
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('智能设备')">智能设备</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('智能手表')">智能手表</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('智能手环')">智能手环</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('数码智能家居')">数码智能家居</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('体感车')">体感车</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('智能机器人')">智能机器人</a></em>
+										</dd>
+									</dl>
+									<dl class="fore2">
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('电子教育')">电子教育</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('电子词典')">电子词典</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('复读机')">复读机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('学生平板')">学生平板</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('早教机')">早教机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('录音笔')">录音笔</a></em>
+										</dd>
 									</dl>
 									<dl class="fore3">
-										<dt><a href="">音像</a></dt>
-										<dd><em><a href="">音乐</a></em><em><a href="">影视</a></em><em><a href="">教育音像</a></em><em><a href="">游戏</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('数码配件')">数码配件</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('读卡器')">读卡器</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('滤镜')">滤镜</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('闪光灯')">闪光灯</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('充电器')">充电器</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('数码相机包')">数码相机包</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('相机贴膜')">相机贴膜</a></em>
+										</dd>
 									</dl>
 									<dl class="fore4">
-										<dt>文艺</dt>
-										<dd><em><a href="">小说</a></em><em><a href="">文学</a></em><em><a href="">青春文学</a></em><em><a href="">传记</a></em><em><a href="">艺术</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('手机通讯')">手机通讯</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('老年机')">老年机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('全屏机')">全屏机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('对讲机')">对讲机</a></em>
+										</dd>
 									</dl>
 									<dl class="fore5">
-										<dt>人文社科</dt>
-										<dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a href="">社会科学</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('手机配件')">手机配件</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('蓝牙耳机')">蓝牙耳机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('手机贴膜')">手机贴膜</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('数据线')">数据线</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('便携无线音响')">便携无线音响</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('车载')">车载</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('电池配件')">电池配件</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('手机保护套')">手机保护套</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('手机饰品')">手机饰品</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('有线耳机')">有线耳机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('充电宝')">充电宝</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('手机支架')">手机支架</a></em>
+										</dd>
 									</dl>
-									<dl class="fore6">
-										<dt>经管励志</dt>
-										<dd><em><a href="">经济</a></em><em><a href="">金融与投资</a></em><em><a href="">管理</a></em><em><a href="">励志与成功</a></em></dd>
-									</dl>
-									<dl class="fore7">
-										<dt>生活</dt>
-										<dd><em><a href="">家庭与育儿</a></em><em><a href="">旅游/地图</a></em><em><a href="">烹饪/美食</a></em><em><a href="">时尚/美妆</a></em><em><a href="">家居</a></em><em><a href="">婚恋与两性</a></em><em><a href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a href="">动漫/幽默</a></em><em><a href="">体育/运动</a></em></dd>
-									</dl>
-									<dl class="fore8">
-										<dt>科技</dt>
-										<dd><em><a href="">科普</a></em><em><a href="">IT</a></em><em><a href="">建筑</a></em><em><a href="">医学</a></em><em><a href="">工业技术</a></em><em><a href="">电子/通信</a></em><em><a href="">农林</a></em><em><a href="">科学与自然</a></em></dd>
-									</dl>
-									<dl class="fore9">
-										<dt>少儿</dt>
-										<dd><em><a href="">少儿</a></em><em><a href="">0-2岁</a></em><em><a href="">3-6岁</a></em><em><a href="">7-10岁</a></em><em><a href="">11-14岁</a></em></dd>
+									<dl class="fore5">
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('摄像')">摄像/摄影</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('微单相机')">微单相机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('单反相机')">单反相机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('摄像机')">摄像机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('数码相机')">数码相机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('运动相机')">运动相机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('拍立得')">拍立得</a></em>
+										</dd>
 									</dl>
 								</div>
 							</div>
 						</div>
 						<div class="item">
-							<h3><a href="">手机、数码</a></h3>
+							<h3><a href="javascript:void(0)">电脑、办公</a></h3>
 							<div class="item-list clearfix">
 								<div class="subitem">
 									<dl class="fore1">
-										<dt><a href="">电子书2</a></dt>
-										<dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('电脑整机')">电脑整机</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('笔记本')">笔记本</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('超极本')">超极本</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('平板电脑')">平板电脑</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('台式机')">台式机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('游戏本')">游戏本</a></em>
+										</dd>
 									</dl>
 									<dl class="fore2">
-										<dt><a href="">数字音乐</a></dt>
-										<dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a href="">有声读物</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('电脑配件')">电脑配件</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('CPU')">CPU</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('内存')">内存</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('显卡')">显卡</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('硬盘')">硬盘</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('声卡')">声卡</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('电脑散热器')">电脑散热器</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('光驱')">光驱</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('SSD固态硬盘')">SSD固态硬盘</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('主板')">主板</a></em>
+										</dd>
 									</dl>
 									<dl class="fore3">
-										<dt><a href="">音像</a></dt>
-										<dd><em><a href="">音乐</a></em><em><a href="">影视</a></em><em><a href="">教育音像</a></em><em><a href="">游戏</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('外设产品')">外设产品</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('U盘')">U盘</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('鼠标')">鼠标</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('键盘')">键盘</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('电脑清洁')">电脑清洁</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('电脑摄像头')">电脑摄像头</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('移动硬盘')">移动硬盘</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('鼠标垫')">鼠标垫</a></em>
+										</dd>
 									</dl>
 									<dl class="fore4">
-										<dt>文艺</dt>
-										<dd><em><a href="">小说</a></em><em><a href="">文学</a></em><em><a href="">青春文学</a></em><em><a href="">传记</a></em><em><a href="">艺术</a></em></dd>
-									</dl>
-									<dl class="fore5">
-										<dt>人文社科</dt>
-										<dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a href="">社会科学</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('办公打印')">办公打印</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('打印机')">打印机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('复合机')">复合机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('传真机')">传真机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('一体机')">一体机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('扫描仪')">扫描仪</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('墨盒')">墨盒</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('色带')">色带</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('投影机')">投影机</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('墨粉')">墨粉</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('碎纸机')">碎纸机</a></em>
+										</dd>
 									</dl>
 								</div>
 							</div>
 						</div>
 						<div class="item">
-							<h3><a href="">电脑、办公</a></h3>
+							<h3><a href="javascript:void(0)">家居、家具、家装、厨具</a></h3>
 							<div class="item-list clearfix">
 								<div class="subitem">
 									<dl class="fore1">
-										<dt><a href="">电子书3</a></dt>
-										<dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('茶具')">茶具</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('整套茶具')">整套茶具</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('咖啡具')">咖啡具</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('茶叶罐')">茶叶罐</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('茶杯')">茶杯</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('茶壶')">茶壶</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('茶具配件')">茶具配件</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('茶具托盘')">茶具托盘</a></em>
+										</dd>
 									</dl>
 									<dl class="fore2">
-										<dt><a href="">数字音乐</a></dt>
-										<dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a href="">有声读物</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('儿童家具')">儿童家具</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('儿童床')">儿童床</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('儿童桌椅')">儿童桌椅</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('儿童柜')">儿童柜</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('儿童床垫')">儿童床垫</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('儿童书桌')">儿童书桌</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('儿童椅凳')">儿童椅凳</a></em>
+										</dd>
 									</dl>
 									<dl class="fore3">
-										<dt><a href="">音像</a></dt>
-										<dd><em><a href="">音乐</a></em><em><a href="">影视</a></em><em><a href="">教育音像</a></em><em><a href="">游戏</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('卧室家具')">卧室家具</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('床')">床</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('床头柜')">床头柜</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('床垫')">床垫</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('穿衣镜')">穿衣镜</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('梳妆台')">梳妆台</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('衣柜')">衣柜</a></em>
+										</dd>
 									</dl>
 									<dl class="fore4">
-										<dt>文艺</dt>
-										<dd><em><a href="">小说</a></em><em><a href="">文学</a></em><em><a href="">青春文学</a></em><em><a href="">传记</a></em><em><a href="">艺术</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('客厅家具')">客厅家具</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('电视柜')">电视柜</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('壁炉')">壁炉</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('沙发')">沙发</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('沙发床')">沙发床</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('鞋柜')">鞋柜</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('茶几')">茶几</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('屏风')">屏风</a></em>
+										</dd>
 									</dl>
 									<dl class="fore5">
-										<dt>人文社科</dt>
-										<dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a href="">社会科学</a></em></dd>
-									</dl>
-									<dl class="fore6">
-										<dt>经管励志</dt>
-										<dd><em><a href="">经济</a></em><em><a href="">金融与投资</a></em><em><a href="">管理</a></em><em><a href="">励志与成功</a></em></dd>
-									</dl>
-									<dl class="fore7">
-										<dt>生活</dt>
-										<dd><em><a href="">家庭与育儿</a></em><em><a href="">旅游/地图</a></em><em><a href="">烹饪/美食</a></em><em><a href="">时尚/美妆</a></em><em><a href="">家居</a></em><em><a href="">婚恋与两性</a></em><em><a href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a href="">动漫/幽默</a></em><em><a href="">体育/运动</a></em></dd>
-									</dl>
-									<dl class="fore8">
-										<dt>科技</dt>
-										<dd><em><a href="">科普</a></em><em><a href="">IT</a></em><em><a href="">建筑</a></em><em><a href="">医学</a></em><em><a href="">工业技术</a></em><em><a href="">电子/通信</a></em><em><a href="">农林</a></em><em><a href="">科学与自然</a></em></dd>
-									</dl>
-									<dl class="fore9">
-										<dt>少儿</dt>
-										<dd><em><a href="">少儿</a></em><em><a href="">0-2岁</a></em><em><a href="">3-6岁</a></em><em><a href="">7-10岁</a></em><em><a href="">11-14岁</a></em></dd>
-									</dl>
-									<dl class="fore10">
-										<dt>教育</dt>
-										<dd><em><a href="">教材教辅</a></em><em><a href="">考试</a></em><em><a href="">外语学习</a></em></dd>
-									</dl>
-									<dl class="fore11">
-										<dt>其它</dt>
-										<dd><em><a href="">英文原版书</a></em><em><a href="">港台图书</a></em><em><a href="">工具书</a></em><em><a href="">套装书</a></em><em><a href="">杂志/期刊</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('烹饪锅具')">厨具</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('炒锅')">炒锅</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('锅具套装')">锅具套装</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('火锅')">火锅</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('水壶')">水壶</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('压力锅')">压力锅</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('不粘锅')">不粘锅</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('菜刀')">菜刀</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('多功能刀')">多功能刀</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('瓜果刀')">瓜果刀</a></em>
+										</dd>
 									</dl>
 								</div>
 							</div>
 						</div>
 						<div class="item">
-							<h3><a href="">家居、家具、家装、厨具</a></h3>
+							<h3><a href="javascript:void(0)">服饰内衣</a></h3>
 							<div class="item-list clearfix">
 								<div class="subitem">
 									<dl class="fore1">
-										<dt><a href="">电子书4</a></dt>
-										<dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em></dd>
-									</dl>
-									<dl class="fore2">
-										<dt><a href="">数字音乐</a></dt>
-										<dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a href="">有声读物</a></em></dd>
-									</dl>
-									<dl class="fore3">
-										<dt><a href="">音像</a></dt>
-										<dd><em><a href="">音乐</a></em><em><a href="">影视</a></em><em><a href="">教育音像</a></em><em><a href="">游戏</a></em></dd>
-									</dl>
-									<dl class="fore4">
-										<dt>文艺</dt>
-										<dd><em><a href="">小说</a></em><em><a href="">文学</a></em><em><a href="">青春文学</a></em><em><a href="">传记</a></em><em><a href="">艺术</a></em></dd>
-									</dl>
-									<dl class="fore5">
-										<dt>人文社科</dt>
-										<dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a href="">社会科学</a></em></dd>
-									</dl>
-									<dl class="fore6">
-										<dt>经管励志</dt>
-										<dd><em><a href="">经济</a></em><em><a href="">金融与投资</a></em><em><a href="">管理</a></em><em><a href="">励志与成功</a></em></dd>
-									</dl>
-									<dl class="fore7">
-										<dt>生活</dt>
-										<dd><em><a href="">家庭与育儿</a></em><em><a href="">旅游/地图</a></em><em><a href="">烹饪/美食</a></em><em><a href="">时尚/美妆</a></em><em><a href="">家居</a></em><em><a href="">婚恋与两性</a></em><em><a href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a href="">动漫/幽默</a></em><em><a href="">体育/运动</a></em></dd>
-									</dl>
-									<dl class="fore8">
-										<dt>科技</dt>
-										<dd><em><a href="">科普</a></em><em><a href="">IT</a></em><em><a href="">建筑</a></em><em><a href="">医学</a></em><em><a href="">工业技术</a></em><em><a href="">电子/通信</a></em><em><a href="">农林</a></em><em><a href="">科学与自然</a></em></dd>
-									</dl>
-									<dl class="fore9">
-										<dt>少儿</dt>
-										<dd><em><a href="">少儿</a></em><em><a href="">0-2岁</a></em><em><a href="">3-6岁</a></em><em><a href="">7-10岁</a></em><em><a href="">11-14岁</a></em></dd>
-									</dl>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<h3><a href="">服饰内衣</a></h3>
-							<div class="item-list clearfix">
-								<div class="subitem">
-									<dl class="fore1">
-										<dt><a href="">电子书5</a></dt>
-										<dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em></dd>
-									</dl>
-									<dl class="fore2">
-										<dt><a href="">数字音乐</a></dt>
-										<dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a href="">有声读物</a></em></dd>
-									</dl>
-									<dl class="fore3">
-										<dt><a href="">音像</a></dt>
-										<dd><em><a href="">音乐</a></em><em><a href="">影视</a></em><em><a href="">教育音像</a></em><em><a href="">游戏</a></em></dd>
-									</dl>
-									<dl class="fore4">
-										<dt>文艺</dt>
-										<dd><em><a href="">小说</a></em><em><a href="">文学</a></em><em><a href="">青春文学</a></em><em><a href="">传记</a></em><em><a href="">艺术</a></em></dd>
-									</dl>
-									<dl class="fore5">
-										<dt>人文社科</dt>
-										<dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a href="">社会科学</a></em></dd>
-									</dl>
-									<dl class="fore6">
-										<dt>经管励志</dt>
-										<dd><em><a href="">经济</a></em><em><a href="">金融与投资</a></em><em><a href="">管理</a></em><em><a href="">励志与成功</a></em></dd>
-									</dl>
-									<dl class="fore7">
-										<dt>生活</dt>
-										<dd><em><a href="">家庭与育儿</a></em><em><a href="">旅游/地图</a></em><em><a href="">烹饪/美食</a></em><em><a href="">时尚/美妆</a></em><em><a href="">家居</a></em><em><a href="">婚恋与两性</a></em><em><a href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a href="">动漫/幽默</a></em><em><a href="">体育/运动</a></em></dd>
-									</dl>
-									<dl class="fore8">
-										<dt>科技</dt>
-										<dd><em><a href="">科普</a></em><em><a href="">IT</a></em><em><a href="">建筑</a></em><em><a href="">医学</a></em><em><a href="">工业技术</a></em><em><a href="">电子/通信</a></em><em><a href="">农林</a></em><em><a href="">科学与自然</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('服饰')">服饰</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('短袖')">短袖</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('九分裤')">九分裤</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('仙女裙')">仙女裙</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('沙滩裤')">沙滩裤</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('工装裤')">工装裤</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('运动裤')">运动裤</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('小脚裤')">小脚裤</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('卫衣')">卫衣</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('超短裤')">超短裤</a></em>
+										</dd>
 									</dl>
 								</div>
 							</div>
@@ -366,146 +393,194 @@
 							<div class="item-list clearfix">
 								<div class="subitem">
 									<dl class="fore1">
-										<dt><a href="">电子书6</a></dt>
-										<dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('香水彩妆')">香水彩妆</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('香水')">香水</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('底妆')">底妆</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('唇妆')">唇妆</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('腮红')">腮红</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('美甲')">美甲</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('眼影')">眼影</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('眼线')">眼线</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('睫毛膏')">睫毛膏</a></em>
+										</dd>
 									</dl>
 									<dl class="fore2">
-										<dt><a href="">数字音乐</a></dt>
-										<dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a href="">有声读物</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('洗发护发')">洗发护发</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('洗发水')">洗发水</a></em>
+											<em><a href="javascript:void(0)"  ng-click="searchByHotKey('护发素')">护发素</a></em>
+										</dd>
 									</dl>
 									<dl class="fore3">
-										<dt><a href="">音像</a></dt>
-										<dd><em><a href="">音乐</a></em><em><a href="">影视</a></em><em><a href="">教育音像</a></em><em><a href="">游戏</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('面部护肤')">面部护肤</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('面膜')">面膜</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('洗面奶')">洗面奶</a></em>
+										</dd>
 									</dl>
 									<dl class="fore4">
-										<dt>文艺</dt>
-										<dd><em><a href="">小说</a></em><em><a href="">文学</a></em><em><a href="">青春文学</a></em><em><a href="">传记</a></em><em><a href="">艺术</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('身体护肤')">身体护肤</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('沐浴液')">沐浴液</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('浴盐')">浴盐</a></em>
+										</dd>
 									</dl>
 									<dl class="fore5">
-										<dt>人文社科</dt>
-										<dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a href="">社会科学</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('口腔护理')">口腔护理</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('牙膏')">牙膏</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('牙粉')">牙粉</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('牙刷')">牙刷</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('牙线')">牙线</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('漱口水')">漱口水</a></em>
+										</dd>
 									</dl>
 									<dl class="fore6">
-										<dt>经管励志</dt>
-										<dd><em><a href="">经济</a></em><em><a href="">金融与投资</a></em><em><a href="">管理</a></em><em><a href="">励志与成功</a></em></dd>
-									</dl>
-									<dl class="fore7">
-										<dt>生活</dt>
-										<dd><em><a href="">家庭与育儿</a></em><em><a href="">旅游/地图</a></em><em><a href="">烹饪/美食</a></em><em><a href="">时尚/美妆</a></em><em><a href="">家居</a></em><em><a href="">婚恋与两性</a></em><em><a href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a href="">动漫/幽默</a></em><em><a href="">体育/运动</a></em></dd>
-									</dl>
-									<dl class="fore8">
-										<dt>科技</dt>
-										<dd><em><a href="">科普</a></em><em><a href="">IT</a></em><em><a href="">建筑</a></em><em><a href="">医学</a></em><em><a href="">工业技术</a></em><em><a href="">电子/通信</a></em><em><a href="">农林</a></em><em><a href="">科学与自然</a></em></dd>
-									</dl>
-									<dl class="fore9">
-										<dt>少儿</dt>
-										<dd><em><a href="">少儿</a></em><em><a href="">0-2岁</a></em><em><a href="">3-6岁</a></em><em><a href="">7-10岁</a></em><em><a href="">11-14岁</a></em></dd>
-									</dl>
-									<dl class="fore10">
-										<dt>教育</dt>
-										<dd><em><a href="">教材教辅</a></em><em><a href="">考试</a></em><em><a href="">外语学习</a></em></dd>
-									</dl>
-									<dl class="fore11">
-										<dt>其它</dt>
-										<dd><em><a href="">英文原版书</a></em><em><a href="">港台图书</a></em><em><a href="">工具书</a></em><em><a href="">套装书</a></em><em><a href="">杂志/期刊</a></em></dd>
-									</dl>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<h3><a href="">运动健康</a></h3>
-							<div class="item-list clearfix">
-								<div class="subitem">
-									<dl class="fore1">
-										<dt><a href="">电子书7</a></dt>
-										<dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em></dd>
-									</dl>
-									<dl class="fore2">
-										<dt><a href="">数字音乐</a></dt>
-										<dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a href="">有声读物</a></em></dd>
-									</dl>
-									<dl class="fore3">
-										<dt><a href="">音像</a></dt>
-										<dd><em><a href="">音乐</a></em><em><a href="">影视</a></em><em><a href="">教育音像</a></em><em><a href="">游戏</a></em></dd>
-									</dl>
-									<dl class="fore4">
-										<dt>文艺</dt>
-										<dd><em><a href="">小说</a></em><em><a href="">文学</a></em><em><a href="">青春文学</a></em><em><a href="">传记</a></em><em><a href="">艺术</a></em></dd>
-									</dl>
-								</div>
-								<div class="cat-right">
-									<dl class="categorys-brands" clstag="homepage|keycount|home2013|0601d">
-										<dt>推荐品牌出版商</dt>
-										<dd>
-											<ul>
-												<li>
-													<a href="">中华书局</a>
-												</li>
-												<li>
-													<a href="">人民邮电出版社</a>
-												</li>
-											</ul>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('女性护理')">女性护理</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('卫生巾')">卫生巾</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('脱毛膏')">脱毛膏</a></em>
 										</dd>
 									</dl>
 								</div>
 							</div>
 						</div>
 						<div class="item">
-							<h3><a href="">汽车用品</a></h3>
+							<h3><a href="javascript:void(0)">运动健康</a></h3>
 							<div class="item-list clearfix">
 								<div class="subitem">
 									<dl class="fore1">
-										<dt><a href="">电子书8</a></dt>
-										<dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('运动鞋包')">运动鞋包</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('篮球鞋')">篮球鞋</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('跑步鞋')">跑步鞋</a></em>
+										</dd>
 									</dl>
 									<dl class="fore2">
-										<dt><a href="">数字音乐</a></dt>
-										<dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a href="">有声读物</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('运动服饰')">运动服饰</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('运动裤')">运动裤</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('运动背心')">运动背心</a></em>
+										</dd>
 									</dl>
 									<dl class="fore3">
-										<dt><a href="">音像</a></dt>
-										<dd><em><a href="">音乐</a></em><em><a href="">影视</a></em><em><a href="">教育音像</a></em><em><a href="">游戏</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('垂钓用品')">垂钓用品</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('钓竿')">钓竿</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('鱼线')">鱼线</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('鱼饵')">鱼饵</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('钓鱼灯')">钓鱼灯</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('鱼钩')">鱼钩</a></em>
+										</dd>
 									</dl>
 									<dl class="fore4">
-										<dt>文艺</dt>
-										<dd><em><a href="">小说</a></em><em><a href="">文学</a></em><em><a href="">青春文学</a></em><em><a href="">传记</a></em><em><a href="">艺术</a></em></dd>
-									</dl>
-									<dl class="fore5">
-										<dt>人文社科</dt>
-										<dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a href="">社会科学</a></em></dd>
-									</dl>
-									<dl class="fore6">
-										<dt>经管励志</dt>
-										<dd><em><a href="">经济</a></em><em><a href="">金融与投资</a></em><em><a href="">管理</a></em><em><a href="">励志与成功</a></em></dd>
-									</dl>
-									<dl class="fore7">
-										<dt>生活</dt>
-										<dd><em><a href="">家庭与育儿</a></em><em><a href="">旅游/地图</a></em><em><a href="">烹饪/美食</a></em><em><a href="">时尚/美妆</a></em><em><a href="">家居</a></em><em><a href="">婚恋与两性</a></em><em><a href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a href="">动漫/幽默</a></em><em><a href="">体育/运动</a></em></dd>
-									</dl>
-									<dl class="fore8">
-										<dt>科技</dt>
-										<dd><em><a href="">科普</a></em><em><a href="">IT</a></em><em><a href="">建筑</a></em><em><a href="">医学</a></em><em><a href="">工业技术</a></em><em><a href="">电子/通信</a></em><em><a href="">农林</a></em><em><a href="">科学与自然</a></em></dd>
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('健身训练')">健身训练</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('哑铃')">哑铃</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('跑步机')">跑步机</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('动感单车')">动感单车</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('健腹轮')">健腹轮</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('拉力器')">拉力器</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('臂力器')">臂力器</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('增肌粉')">增肌粉</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('甩脂机')">甩脂机</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('单杠')">单杠</a></em>
+										</dd>
 									</dl>
 								</div>
 							</div>
 						</div>
 						<div class="item">
-							<h3><a href="">彩票、旅行</a></h3>
+							<h3><a href="javascript:void(0)">汽车用品</a></h3>
+							<div class="item-list clearfix">
+								<div class="subitem">
+									<dl class="fore1">
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('维修保养')">维修保养</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('润滑油')">润滑油</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('轮胎')">轮胎</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('防冻液')">防冻液</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('火花塞')">火花塞</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('刹车片')">刹车片</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('雨刷')">雨刷</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('汽车玻璃')">汽车玻璃</a></em>
+										</dd>
+									</dl>
+									<dl class="fore2">
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('安全自驾')">安全自驾</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('安全座椅')">安全座椅</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('摩托车装备')">摩托车装备</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('车载床')">车载床</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('地锁')">地锁</a></em>
+										</dd>
+									</dl>
+
+								</div>
+							</div>
 						</div>
 						<div class="item">
-							<h3><a href="">理财、众筹</a></h3>
+							<h3><a href="javascript:void(0)">母婴、玩具</a></h3>
+							<div class="item-list clearfix">
+								<div class="subitem">
+									<dl class="fore1">
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('奶粉')">奶粉</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('婴幼奶粉')">婴幼奶粉</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('成人奶粉')">成人奶粉</a></em>
+										</dd>
+									</dl>
+									<dl class="fore2">
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('尿布')">尿布</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('婴儿尿裤')">婴儿尿裤</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('湿巾')">湿巾</a></em>
+										</dd>
+									</dl>
+									<dl class="fore3">
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('安全座椅')">安全座椅</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('儿童安全座椅')">儿童安全座椅</a></em>
+										</dd>
+									</dl>
+									<dl class="fore4">
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('娃娃玩具')">娃娃玩具</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('芭比娃娃')">芭比娃娃</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('卡通娃娃')">卡通娃娃</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('智能娃娃')">智能娃娃</a></em>
+										</dd>
+									</dl>
+									<dl class="fore5">
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('益智玩具')">益智玩具</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('积木')">积木</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('拼图')">拼图</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('魔方')">魔方</a></em>
+										</dd>
+									</dl>
+								</div>
+							</div>
 						</div>
 						<div class="item">
-							<h3><a href="">母婴、玩具</a></h3>
+							<h3><a href="javascript:void(0)">酒水</a></h3>
+							<div class="item-list clearfix">
+								<div class="subitem">
+									<dl class="fore1">
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('酒')">酒</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('啤酒')">啤酒</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('白酒')">白酒</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('葡萄酒')">葡萄酒</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('洋酒')">洋酒</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('陈年老酒')">陈年老酒</a></em>
+										</dd>
+									</dl>
+									<dl class="fore2">
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('饮料')">饮料</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('碳酸饮料')">碳酸饮料</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('矿泉水')">矿泉水</a></em>
+										</dd>
+									</dl>
+								</div>
+							</div>
 						</div>
 						<div class="item">
-							<h3><a href="">箱包</a></h3>
-						</div>
-						<div class="item">
-							<h3><a href="">运动户外</a></h3>
-						</div>
-						<div class="item">
-							<h3><a href="">箱包</a></h3>
+							<h3><a href="javascript:void(0)">零食</a></h3>
+							<div class="item-list clearfix">
+								<div class="subitem">
+									<dl class="fore1">
+										<dt><a href="javascript:void(0)"  ng-click="searchByHotKey('休闲食品')">休闲食品</a></dt>
+										<dd><em><a href="javascript:void(0)"  ng-click="searchByHotKey('坚果')">坚果</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('无糖食品')">无糖食品</a></em>
+										<em><a href="javascript:void(0)"  ng-click="searchByHotKey('葡萄酒')">肉干肉脯</a></em>
+										</dd>
+									</dl>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -513,17 +588,68 @@
 					<!--banner轮播-->
 					<div id="myCarousel" data-ride="carousel" data-interval="4000" class="sui-carousel slide">
 					  <ol class="carousel-indicators">
-					    <li data-target="#myCarousel" data-slide-to="{{$index}}" class="{{$index==0?'active':''}}"  ng-repeat="item in contentList[1]"></li>
-					   
+					    <!--<li data-target="#myCarousel" data-slide-to="{{$index}}" class="{{$index==0?'active':''}}"  ng-repeat="item in contentList[1]"></li>-->
+					    <li data-target="#myCarousel" data-slide-to="0" class="{{$index==0?'active':''}}" ></li>
+					    <li data-target="#myCarousel" data-slide-to="1" class="{{$index==1?'active':''}}" ></li>
+					    <li data-target="#myCarousel" data-slide-to="2" class="{{$index==2?'active':''}}" ></li>
+					    <li data-target="#myCarousel" data-slide-to="3" class="{{$index==3?'active':''}}" ></li>
+					    <li data-target="#myCarousel" data-slide-to="4" class="{{$index==4?'active':''}}" ></li>
 					  </ol>
 					  <div class="carousel-inner">
-					    <div class="{{$index==0?'active':''}} item" ng-repeat="item in contentList[1]">
+					    <!--<div class="{{$index==0?'active':''}} item" ng-repeat="item in contentList[1]">-->
+					    <div class="{{$index==0?'active':''}} item" >
 					    <a href="{{item.url}}">
-					    	<img src=" {{item.pic}}"  />
+					    	<!--<img src=" {{item.pic}}"  />-->
+					    	<img src="../img/banner1.jpg"  />
+					    	<!--<img src="../img/banner2.jpg"  />-->
+					    	<!--<img src="../img/banner3.jpg"  />-->
+					    	<!--<img src="../img/banner4.jpg"  />-->
+					    	<!--<img src="../img/banner5.jpg"  />-->
 					      </a>
 					    </div>
+						  <div class="{{$index==1?'active':''}} item" >
+							  <a href="{{item.url}}">
+								  <!--<img src=" {{item.pic}}"  />-->
+								  <!--<img src="../img/banner1.jpg"  />-->
+								  <img src="../img/banner2.jpg"  />
+								  <!--<img src="../img/banner3.jpg"  />-->
+								  <!--<img src="../img/banner4.jpg"  />-->
+								  <!--<img src="../img/banner5.jpg"  />-->
+							  </a>
+						  </div>
+						  <div class="{{$index==2?'active':''}} item" >
+							  <a href="{{item.url}}">
+								  <!--<img src=" {{item.pic}}"  />-->
+								  <!--<img src="../img/banner1.jpg"  />-->
+								  <!--<img src="../img/banner2.jpg"  />-->
+								  <img src="../img/banner3.jpg"  />
+								  <!--<img src="../img/banner4.jpg"  />-->
+								  <!--<img src="../img/banner5.jpg"  />-->
+							  </a>
+						  </div>
+						  <div class="{{$index==3?'active':''}} item" >
+							  <a href="{{item.url}}">
+								  <!--<img src=" {{item.pic}}"  />-->
+								  <!--<img src="../img/banner1.jpg"  />-->
+								  <!--<img src="../img/banner2.jpg"  />-->
+								  <!--<img src="../img/banner3.jpg"  />-->
+								  <img src="../img/banner4.jpg"  />
+								  <!--<img src="../img/banner5.jpg"  />-->
+							  </a>
+						  </div>
+						  <div class="{{$index==4?'active':''}} item" >
+							  <a href="{{item.url}}">
+								  <!--<img src=" {{item.pic}}"  />-->
+								  <!--<img src="../img/banner1.jpg"  />-->
+								  <!--<img src="../img/banner2.jpg"  />-->
+								  <!--<img src="../img/banner3.jpg"  />-->
+								  <!--<img src="../img/banner4.jpg"  />-->
+								  <img src="../img/banner1.png"  />
+							  </a>
+						  </div>
 					    
-					  </div><a href="#myCarousel" data-slide="prev" class="carousel-control left">‹</a><a href="#myCarousel" data-slide="next" class="carousel-control right">›</a>
+					  </div>
+						<a href="#myCarousel" data-slide="prev" class="carousel-control left">‹</a><a href="#myCarousel" data-slide="next" class="carousel-control right">›</a>
 					</div>
 				</div>
 				<div class="yui3-u Right">

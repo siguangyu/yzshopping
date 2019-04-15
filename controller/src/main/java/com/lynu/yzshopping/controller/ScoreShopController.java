@@ -189,7 +189,7 @@ public class ScoreShopController {
         Map<String, Object> map = new HashMap<>();
         map.put("status", YZConstants.EXCHANGE_STATUS);
         map.put("userId", userId);
-        map.put("goodsId", goodsId);
+        map.put("id", goodsId);
         String res = scoreShopService.SaveOrExchangeShop(map);
         if (res.contains("成功")){
             return ResultHandle.getSuccessResult(res);

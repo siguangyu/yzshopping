@@ -9,13 +9,19 @@ app.controller('userController', function ($scope, userService) {
 
         // alert($scope.entity);
         $scope.entity.id=sessionStorage.getItem("userId");
+        if($scope.entity.newPassword!=null&&$scope.entity.newPassword2!=null){
+            if($scope.entity.newPassword!=$scope.entity.newPassword2){
+                alert("两次输入的密码不一致！");
+                return;
+            }
+        }
         userService.updateUserInfo($scope.entity).success(
             function(response){
                 alert(response.message);
 
                 if (response.code==200){
                     //设置 sessionStorage中用户名的值
-                    console.log(response.data.username);
+                    // console.log(response.data.username);
                     sessionStorage.setItem("userName",response.data.username);
                     location.reload();
                 }
@@ -93,6 +99,9 @@ app.controller('userController', function ($scope, userService) {
                     sessionStorage.setItem("userName",userName);
                     //跳转到首页
                     window.location="../index.html";
+                }
+                else{
+                    alert("账号或密码错误");
                 }
             }
         );
