@@ -12,6 +12,9 @@ app.service("scoreShopService",function($http){
     this. scoreDetail=function (userId,page) {
         return $http.get("user/scoreShop/selectScoreDetail?userId="+userId+"&page="+page);
     }
+    this. orderDetail=function (userId,page) {
+        return $http.get("user/scoreShop/selectOrderDetail?userId="+userId+"&page="+page);
+    }
     this. selectScoreShop=function (userId,page) {
         return $http.get("user/scoreShop/selectScoreShop?userId="+userId+"&page="+page);
     }

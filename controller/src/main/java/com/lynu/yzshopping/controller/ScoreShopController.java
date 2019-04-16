@@ -5,11 +5,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.lynu.yzshopping.mybatis.entity.Goods;
+import com.lynu.yzshopping.mybatis.entity.*;
+import com.lynu.yzshopping.service.UserGoodMappingService;
 import com.lynu.yzshopping.service.constants.YZConstants;
-import com.lynu.yzshopping.mybatis.entity.Result;
-import com.lynu.yzshopping.mybatis.entity.Score;
-import com.lynu.yzshopping.mybatis.entity.ScoreShop;
 import com.lynu.yzshopping.service.ScoreService;
 import com.lynu.yzshopping.service.ScoreShopService;
 import com.lynu.yzshopping.service.UserService;
@@ -25,10 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Api(value = "积分商城相关接口", tags = "积分商城相关接口")
 @RestController
@@ -38,6 +33,8 @@ public class ScoreShopController {
 
     @Autowired
     ScoreShopService scoreShopService;
+    @Autowired
+    UserGoodMappingService userGoodMappingService;
 
     @Autowired
     ScoreService scoreService;
@@ -246,5 +243,56 @@ public class ScoreShopController {
         List<Score> scoreList = scoreService.selectByConditionMap(map);
         PageInfo<Score> pageInfo = new PageInfo<>(scoreList);
         return ResultHandle.getSuccessResult().setData(pageInfo);
+    }
+
+    @ApiOperation(value = "根据id查询订单", notes = "根据id查询订单")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "page", value = "页码", required = false, dataType = "int", paramType = "query"),
+                    @ApiImplicitParam(name = "pageSize", value = "页大小", required = false, dataType = "int", paramType = "query"),
+                    @ApiImplicitParam(name = "userId", value = "用户id", required = true, dataType = "String", paramType = "query")
+            }
+    )
+    @GetMapping("selectOrderDetail")
+    public Result selectOrderDetail(HttpServletRequest request) {
+        Integer userId = Integer.parseInt(request.getParameter("userId"));
+        String pageStr = request.getParameter("page");
+        String pageSizeStr = request.getParameter("pageSize");
+        int page = YZConstants.PAGE;
+        int pageSize =10;
+        if (!StringUtils.isBlank(pageStr)) {
+            page = Integer.parseInt(pageStr);
+        }
+        if (!StringUtils.isBlank(pageSizeStr)) {
+            pageSize = Integer.parseInt(pageSizeStr);
+        }
+
+        Map<String,Object> map=new HashMap<>();
+        map.put("userId",userId);
+        String condition="order by id DESC";
+        map.put("condition",condition);
+        PageHelper.startPage(page, pageSize);
+        List<UserGoodMapping> orderList = userGoodMappingService.selectByConditionMap(map);
+
+       List<Map<String,Object>> resList=new ArrayList<>();
+        //获取映射表中的商品id
+        for (UserGoodMapping userGoodMapping : orderList) {
+          Map<String,Object> resMap=new HashMap<>();
+            Integer goodsId = userGoodMapping.getGoodsId();
+            //根据商品id，去积分商城查询
+            ScoreShop scoreShop = scoreShopService.selectByPrimaryKey(goodsId);
+            resMap.put("createTime",userGoodMapping.getCreateTime());
+            resMap.put("goodTitle",scoreShop.getgTitle());
+            resMap.put("goodPrice",scoreShop.getgPrice());
+            if ((YZConstants.TRANING_STATUS+"").equals(userGoodMapping.getTransactionStatus())){
+                resMap.put("transactionStatus","处理中");
+            }if ((YZConstants.TRAN_OK_STATUS+"").equals(userGoodMapping.getTransactionStatus())){
+                resMap.put("transactionStatus","交易完成");
+            }
+            resList.add(resMap);
+        }
+
+        PageInfo pageInfo = new PageInfo<>(resList);
+        return ResultHandle.getSuccessResult().setData(resList);
     }
 }

@@ -22,4 +22,6 @@ public interface ScoreShopService {
     //收藏、兑换
     String SaveOrExchangeShop(Map<String,Object> map);
 
+    ScoreShop selectByPrimaryKey(Integer id);
+
 }

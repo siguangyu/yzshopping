@@ -112,6 +112,7 @@ public class ScoreShopServiceImpl implements ScoreShopService {
                 userGoodMapping.setGoodsId(goodsId);
                 userGoodMapping.setStatus(status + "");
                 userGoodMapping.setCreateTime(new Date());
+                userGoodMapping.setTransactionStatus(YZConstants.TRANING_STATUS+"");
                 userGoodMappingDao.insert(userGoodMapping);
                 return "兑换成功！";
             } catch (Exception e) {
@@ -126,5 +127,10 @@ public class ScoreShopServiceImpl implements ScoreShopService {
             return "收藏成功";
         }
         return "错误";
+    }
+
+    @Override
+    public ScoreShop selectByPrimaryKey(Integer id) {
+        return scoreShopDao.selectByPrimaryKey(id);
     }
 }

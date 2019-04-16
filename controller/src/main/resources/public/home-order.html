@@ -112,7 +112,7 @@ $(function(){
 <script type="text/javascript" src="js/widget/nav.js"></script>
 </body>
     <!--header-->
-    <div id="account" ng-controller="scoreShopController" ng-init="page=1;scoreDetail(page)">
+    <div id="account" ng-controller="scoreShopController" ng-init="page=1;orderDetail(page)">
         <div class="py-container">
             <div class="yui3-g home">
                 <!--左侧列表-->
@@ -158,15 +158,14 @@ $(function(){
 								<th width="30%">时间</th>
 								<th width="20%">商品名称</th>
 								<th width="30%">商品积分</th>
-								<th width="20%"></th>
+								<th width="20%">交易状态</th>
 								</thead>
 							</tr>
-							<tr ng-repeat="score in scoreList.data.list">
-								<td style="text-align: center">{{score.createTime}}</td>
-								<td style="text-align: center" ng-if="score.operationSign=='1'"><font color="#00FF66">+ {{score.operationNumber}}</font></td>
-								<td style="text-align: center" ng-if="score.operationSign=='2'"> <font color="#FF0000">- {{score.operationNumber}}</font></td>
-								<td style="text-align: center" >{{score.operationDescribe}}</td>
-								<td style="text-align: center" >{{score.scoreTotal}}</td>
+							<tr ng-repeat="order in orderList.data">
+								<td style="text-align: center">{{order.createTime}}</td>
+								<td style="text-align: center" > {{order.goodTitle}}</td>
+								<td style="text-align: center" >{{order.goodPrice}}</td>
+								<td style="text-align: center" >{{order.transactionStatus}}</td>
 							</tr>
 						</table>
                         </div>

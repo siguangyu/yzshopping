@@ -32,4 +32,9 @@ public class ScoreShopDaoImpl implements ScoreShopDao {
     public int updateByPrimaryKey(ScoreShop record) {
         return scoreShopMapper.updateByPrimaryKey(record);
     }
+
+    @Override
+    public ScoreShop selectByPrimaryKey(Integer id) {
+        return scoreShopMapper.selectByPrimaryKey(id);
+    }
 }

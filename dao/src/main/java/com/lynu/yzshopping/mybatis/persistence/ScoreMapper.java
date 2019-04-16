@@ -54,5 +54,5 @@ public interface ScoreMapper {
      */
     int updateByPrimaryKey(Score record);
 
-    public List<Score> selectByConditionMap(Map<String, Object> map) ;
+     List<Score> selectByConditionMap(Map<String, Object> map) ;
 }

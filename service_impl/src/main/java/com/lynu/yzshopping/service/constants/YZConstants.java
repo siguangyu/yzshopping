@@ -12,6 +12,11 @@ public class YZConstants {
     public static final int EXCHANGE_STATUS = 2;
 
 
+    //用户-商品映射表中的交易状态，处理中为0，交易完成为1
+    public static final int TRANING_STATUS=0;
+    public static final int TRAN_OK_STATUS=1;
+
+
     //积分表操作标志 1为+，2为-
     public static final String PLUS_SIGN = "1";
     public static final String MINUS_SIGN = "2";

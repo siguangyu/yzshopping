@@ -21,4 +21,6 @@ public interface ScoreShopDao {
     List<ScoreShop> selectAllByScoreAsc(Map<String,Object> map);
 
     int updateByPrimaryKey(ScoreShop record);
+
+    ScoreShop selectByPrimaryKey(Integer id);
 }

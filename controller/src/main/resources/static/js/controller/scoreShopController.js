@@ -103,6 +103,21 @@ app.controller("scoreShopController", function ($scope, scoreShopService,$window
 
     }
 
+
+    /*订单详情*/
+    $scope.orderDetail = function (page){
+        var userId=sessionStorage.getItem("userId");
+        if (userId==null){
+            alert("请登录！");
+            window.location = "../login.html";
+        }
+        scoreShopService.orderDetail(userId,page).success(
+            function (response) {
+                $scope.orderList=response;
+            }
+        )
+
+    }
     $scope.selectScoreShop=function(page){
         var userId=sessionStorage.getItem("userId");
         if (userId==null){

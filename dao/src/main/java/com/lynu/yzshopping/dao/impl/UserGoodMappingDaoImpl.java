@@ -6,6 +6,9 @@ import com.lynu.yzshopping.mybatis.persistence.UserGoodMappingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Map;
+
 @Repository(value = "userGoodMappingDao")
 public class UserGoodMappingDaoImpl implements UserGoodMappingDao {
     @Autowired
@@ -18,5 +21,10 @@ public class UserGoodMappingDaoImpl implements UserGoodMappingDao {
     @Override
     public int insert(UserGoodMapping record) {
         return userGoodMappingMapper.insert(record);
+    }
+
+    @Override
+    public List<UserGoodMapping> selectByConditionMap(Map<String, Object> map) {
+        return userGoodMappingMapper.selectByConditionMap(map);
     }
 }
