@@ -27,6 +27,11 @@ spring:
             force: true
             charset: utf-8
             enabled: true
+    thymeleaf:
+        cache: false
+    devtools:
+        restart:
+            enabled: true
 mybatis:
 #对应实体类的路径 和 mapper映射文件xml的路径
     typeAliasesPackage: com.eiis.mybatis.entity

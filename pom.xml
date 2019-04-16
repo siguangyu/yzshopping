@@ -129,11 +129,7 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.7</version>
 		</dependency>
-		<dependency>
-			<groupId>org.csource</groupId>
-			<artifactId>fastdfs-client-java</artifactId>
-			<version>1.27-SNAPSHOT</version>
-		</dependency>
+
 
 
 	</dependencies>

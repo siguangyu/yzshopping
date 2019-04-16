@@ -45,7 +45,7 @@ public class UserController {
             int i = userService.insertSelective(jsonBody);
             if (i != 0) {
                 //注册成功,为用户增加积分
-                Score score=new Score();
+                Score score = new Score();
                 score.setUserId(i);
                 score.setScoreTotal("10");  //新用户积分为10
                 score.setOperationSign("1"); //1为+，2为-
@@ -91,9 +91,9 @@ public class UserController {
     }
 
     /*
-    * 查询用户信息
-    * 使用场景：用户信息修改的时候进行回显
-    * */
+     * 查询用户信息
+     * 使用场景：用户信息修改的时候进行回显
+     * */
     @ApiOperation(value = "根据id查询用户", notes = "根据id查询用户")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String", paramType = "query")
@@ -148,7 +148,7 @@ public class UserController {
         String id = (String) json.get("id");
 //        String account = (String) json.get("account");
         String oldPassword = Md5Util.EncoderByMd5((String) json.get("oldPassword"));
-        if ( !StringUtils.isBlank(oldPassword)) {
+        if (!StringUtils.isBlank(oldPassword)) {
             Map<String, Object> map = new HashMap<>();
             map.put("id", id);
 //            map.put("account", account);
@@ -172,7 +172,7 @@ public class UserController {
         } else {
 
             String username = (String) json.get("username");
-//        String phoneNumber = request.getParameter("phoneNumber");
+            String phoneNumber = (String) json.get("phoneNumber");
 //        String birthday = (String) json.get("birthday");  //生日的格式  暂定为1996-12-12
             String year = (String) json.get("year");
             String month = (String) json.get("month");
@@ -189,7 +189,7 @@ public class UserController {
             user.setUsername(username);
             user.setBirthday(birthday);
             user.setQq(qq);
-//        user.setPhoneNumber(phoneNumber);
+            user.setPhoneNumber(phoneNumber);
             user.setMail(mail);
             user.setUpdateTime(new Date());
             String res = userService.updateByPrimaryKeySelective(user);
@@ -256,7 +256,7 @@ public class UserController {
         Map<String, Object> map = new HashMap<>();
         map.put("userId", Integer.parseInt(id));
         List<Score> scoreList = scoreService.selectByConditionMap(map);
-        if (scoreList.size()==0){
+        if (scoreList.size() == 0) {
             return ResultHandle.getFailResult();
         }
         Score score = scoreList.get(scoreList.size() - 1);
@@ -288,7 +288,7 @@ public class UserController {
             //进行签到操作
             Integer scoreTotal = Integer.parseInt(score.getScoreTotal());
             scoreTotal += YZConstants.SIGNED_SCORE_NUMBER;
-            Score sc=new Score();
+            Score sc = new Score();
             sc.setUserId(score.getUserId());
             sc.setScoreTotal(scoreTotal + "");
 //            score.setId(score.getId() + 1);
@@ -311,7 +311,7 @@ public class UserController {
 
             Integer scoreTotal = Integer.parseInt(score.getScoreTotal());
             scoreTotal += YZConstants.SIGNED_SCORE_NUMBER;
-            Score sc=new Score();
+            Score sc = new Score();
             sc.setScoreTotal(scoreTotal + "");
             sc.setUserId(score.getUserId());
 //            sc.setId(score.getId() + 1);
@@ -331,51 +331,52 @@ public class UserController {
         }
 
     }
-        @ApiOperation(value = "初始化界面时判断是否签到", notes = "初始化界面时判断是否签到")
-        @ApiImplicitParams({
-                @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String", paramType = "query")
-        })
-        @GetMapping("issigned")
-        public Result isSigned (HttpServletRequest request){
-            String id = request.getParameter("id");
-            if (StringUtils.isBlank(id)) {
-                return ResultHandle.getFailResult("未登录");
-            }
-            //查询用户积分数量
-            Map<String, Object> map = new HashMap<>();
-            map.put("userId", Integer.parseInt(id));
-            List<Score> scoreList = scoreService.selectByConditionMap(map);
-            if (scoreList.size()==0){
-                return ResultHandle.getFailResult();
-            }
-            Score score = scoreList.get(scoreList.size() - 1);
-            //获取用户操作积分的时间
-            Date time1 = score.getCreateTime();
 
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            //获取今天0点的时间
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.MONTH, 0);
-            calendar.set(Calendar.HOUR_OF_DAY, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
-            String time2 = df.format(calendar.getTime());
-            boolean before = true;
-            try {
-                before = time1.after(df.parse(time2));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (before) {//如果数据库里的时间大于今天零点
-                //则查询operation_describe是否为“签到”
-                if ("签到".equals(score.getOperationDescribe())) {
-                    return ResultHandle.getSuccessResult("已签到");
-                }
-            }
-
-            return ResultHandle.getFailResult("未签到");
+    @ApiOperation(value = "初始化界面时判断是否签到", notes = "初始化界面时判断是否签到")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String", paramType = "query")
+    })
+    @GetMapping("issigned")
+    public Result isSigned(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        if (StringUtils.isBlank(id)) {
+            return ResultHandle.getFailResult("未登录");
         }
+        //查询用户积分数量
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", Integer.parseInt(id));
+        List<Score> scoreList = scoreService.selectByConditionMap(map);
+        if (scoreList.size() == 0) {
+            return ResultHandle.getFailResult();
+        }
+        Score score = scoreList.get(scoreList.size() - 1);
+        //获取用户操作积分的时间
+        Date time1 = score.getCreateTime();
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //获取今天0点的时间
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, 0);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        String time2 = df.format(calendar.getTime());
+        boolean before = true;
+        try {
+            before = time1.after(df.parse(time2));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (before) {//如果数据库里的时间大于今天零点
+            //则查询operation_describe是否为“签到”
+            if ("签到".equals(score.getOperationDescribe())) {
+                return ResultHandle.getSuccessResult("已签到");
+            }
+        }
+
+        return ResultHandle.getFailResult("未签到");
+    }
 
 
 }

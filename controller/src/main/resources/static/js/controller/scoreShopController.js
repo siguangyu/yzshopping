@@ -50,7 +50,11 @@ app.controller("scoreShopController", function ($scope, scoreShopService,$window
                         item= JSON.stringify(item);
                         sessionStorage.setItem("item",item);
                         alert("兑换成功");
+
+                        //刷新当前页面，为了刷新数量
                         $window.location.reload();
+                        //刷新父页面，为了刷新数量
+                        window.opener.location.reload()
                     }else{
                         alert(response.message);
                     }

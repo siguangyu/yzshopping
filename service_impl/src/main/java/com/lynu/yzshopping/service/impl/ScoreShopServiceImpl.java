@@ -69,7 +69,7 @@ public class ScoreShopServiceImpl implements ScoreShopService {
     @Transactional(rollbackFor = Exception.class)
     public String SaveOrExchangeShop(Map<String, Object> map) {
         Integer userId = (Integer) map.get("userId");
-        Integer goodsId = (Integer) map.get("id");
+        Integer goodsId = (Integer) map.get("goodsId");
         Integer status = (Integer) map.get("status");
 
         if (status == YZConstants.EXCHANGE_STATUS) {//兑换商品
@@ -78,8 +78,10 @@ public class ScoreShopServiceImpl implements ScoreShopService {
                 List<Score> scoreList = scoreService.selectByConditionMap(map);
                 Integer scoreTotal = Integer.parseInt(scoreList.get(scoreList.size() - 1).getScoreTotal());
 
+                Map<String,Object> sMap=new HashMap<>();
+                sMap.put("id",goodsId);
                 //获取到兑换商品所需积分
-                List<ScoreShop> scoreShopList = scoreShopService.selectByConditionMap(map);
+                List<ScoreShop> scoreShopList = scoreShopService.selectByConditionMap(sMap);
                 ScoreShop scoreShop = scoreShopList.get(0);
                 Integer gPrice = Integer.parseInt(scoreShop.getgPrice());
 
