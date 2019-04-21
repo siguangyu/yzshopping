@@ -15,7 +15,7 @@ app.service('goodsService',function($http){
 	}
 	//增加 
 	this.add=function(entity){
-		return  $http.post('../goods/add.do',entity );
+		return  $http.post('../manager/addGood',entity );
 	}
 	//修改 
 	this.update=function(entity){

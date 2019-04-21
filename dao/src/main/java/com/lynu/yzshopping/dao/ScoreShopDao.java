@@ -23,4 +23,6 @@ public interface ScoreShopDao {
     int updateByPrimaryKey(ScoreShop record);
 
     ScoreShop selectByPrimaryKey(Integer id);
+
+    int insert(ScoreShop record);
 }

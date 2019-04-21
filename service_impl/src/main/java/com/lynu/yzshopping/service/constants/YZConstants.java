@@ -24,6 +24,10 @@ public class YZConstants {
     //签到所加积分数量
     public static final int SIGNED_SCORE_NUMBER=2;
 
+    //积分商城是否下架，下架为1，不下架为0
+    public static final int XIAJIA_NO=0;
+    public static final int XISAJIA_YES=1;
+
 
 
 }

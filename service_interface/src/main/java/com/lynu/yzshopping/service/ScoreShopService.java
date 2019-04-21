@@ -24,4 +24,6 @@ public interface ScoreShopService {
 
     ScoreShop selectByPrimaryKey(Integer id);
 
+    int insert(ScoreShop record);
+
 }

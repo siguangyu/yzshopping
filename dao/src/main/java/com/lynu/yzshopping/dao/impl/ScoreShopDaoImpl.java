@@ -37,4 +37,9 @@ public class ScoreShopDaoImpl implements ScoreShopDao {
     public ScoreShop selectByPrimaryKey(Integer id) {
         return scoreShopMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public int insert(ScoreShop record) {
+        return scoreShopMapper.insert(record);
+    }
 }

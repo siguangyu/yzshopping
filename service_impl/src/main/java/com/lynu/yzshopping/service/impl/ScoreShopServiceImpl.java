@@ -133,4 +133,9 @@ public class ScoreShopServiceImpl implements ScoreShopService {
     public ScoreShop selectByPrimaryKey(Integer id) {
         return scoreShopDao.selectByPrimaryKey(id);
     }
+
+    @Override
+    public int insert(ScoreShop record) {
+        return scoreShopDao.insert(record);
+    }
 }
