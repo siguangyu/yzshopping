@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Api(value = "图片上传", tags = "图片上传")
 @RestController
-@RequestMapping("upload")
+@RequestMapping("manager")
 public class UploadController {
 	
 
@@ -22,7 +22,9 @@ public class UploadController {
 
 
     @ApiOperation(value = "上传图片", notes = "上传图片")
-
+	/*@ApiImplicitParams({
+			@ApiImplicitParam(name = "gTitle", value = "商品名称", required = true, dataType = "", paramType = "query")
+	})*/
 	@PostMapping(value = "upload",consumes = "multipart/*",headers = "content-type=multipart/form-data")
 	public Result upload(@ApiParam(value="上传的图片",required = true) MultipartFile file) {
 		//1、取文件的扩展名

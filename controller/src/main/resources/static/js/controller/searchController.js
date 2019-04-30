@@ -9,23 +9,47 @@ app.controller('searchController', function ($scope, $location, searchService) {
 
     // 搜索对象
     $scope.searchMap = {
-        'key': '',
+        'searchKey': '',
         'category': '',
         'brand': '',
         'spec': {},
+        'domainch': '',
         'price': '',
         'pageNo': 1,
-        'pageSize': 40,
+        'pageSize': 50,
         'sortField': '',
         'sort': ''
     };
 
+    $scope.search2 = function() {
+        $scope.searchMap.pageNo = parseInt($scope.searchMap.pageNo);
+        $scope.searchMap.searchKey = document.getElementById("autocomplete").value;
+        searchService.search2($scope.searchMap).success(function(response) {
+            $scope.resultMap = response;// 搜索返回的结果
+            if (response.data!=null){
+                document.getElementById("error").style.display="none";
+            }else{
+                //没有搜索结果，显示错误页
+                document.getElementById("error").style.display="";
+            }
+            // console.log( $scope.resultMap);
+
+            buildPageLabel();// 调用分页方法，产生页码数据
+            var searchKey=$scope.searchMap.searchKey;
+            loaddomain(searchKey);
+        });
+
+    }
+
+
+
     $scope.search = function () {
         $scope.searchMap.pageNo = parseInt($scope.searchMap.pageNo);
+        $scope.searchMap.searchKey= $scope.key;
         searchService.search($scope.key,$scope.searchMap.pageNo).success(
             function (response) {
                 $scope.resultMap = response;// 搜索返回的结果
-                console.log( $scope.resultMap.data.page.length);
+                // console.log( $scope.resultMap.length);
                 if (response.data!=null){
                     document.getElementById("error").style.display="none";
                 }else{
@@ -33,6 +57,9 @@ app.controller('searchController', function ($scope, $location, searchService) {
                     document.getElementById("error").style.display="";
                 }
                 buildPageLabel();// 调用分页方法，产生页码数据
+
+                var searchKey=$scope.searchMap.searchKey;
+                loaddomain(searchKey);
         });
 
     }
@@ -47,6 +74,14 @@ app.controller('searchController', function ($scope, $location, searchService) {
 
     }
 
+    //加载商城名称
+    loaddomain = function (searchKey) {
+        searchService.loaddomain(searchKey).success(
+            function (domainCh) {
+                $scope.domain = domainCh;// 搜索返回的结果
+            });
+    }
+
     // 添加搜索项
     $scope.addSearchItem = function (key, value) {
         if (key == 'category' || key == 'brand' || key == 'price') {// 如果点击的是分类或者是品牌
@@ -55,6 +90,11 @@ app.controller('searchController', function ($scope, $location, searchService) {
             $scope.searchMap.spec[key] = value;
         }
         $scope.search();// 执行搜索
+    }
+
+    $scope.addDomainItem = function (value) {
+       $scope.searchMap.domainch=value;
+        $scope.search2();// 执行搜索
     }
 
     // 撤销搜索项
@@ -70,7 +110,7 @@ app.controller('searchController', function ($scope, $location, searchService) {
     // 构建分页标签(totalPages为总页数)
     buildPageLabel = function () {
         $scope.pageLabel = [];// 新增分页栏属性
-        var maxPageNo = $scope.resultMap.data.page.length;// 得到最后页码
+        var maxPageNo = $scope.resultMap.data.pages;// 得到最后页码
         var firstPage = 1;// 开始页码
         var lastPage = maxPageNo;// 截止页码
 
@@ -103,11 +143,11 @@ app.controller('searchController', function ($scope, $location, searchService) {
     // 根据页码查询
     $scope.queryByPage = function (pageNo) {
         // 页码验证
-        if (pageNo < 1 || pageNo > $scope.resultMap.data.page.size) {
+        if (pageNo < 1 || pageNo > $scope.resultMap.data.pages) {
             return;
         }
         $scope.searchMap.pageNo = pageNo;
-        $scope.search();
+        $scope.search2();
     }
 
 
@@ -132,7 +172,7 @@ app.controller('searchController', function ($scope, $location, searchService) {
     $scope.sortSearch = function (sortField, sort) {
         $scope.searchMap.sortField = sortField;
         $scope.searchMap.sort = sort;
-        $scope.search();
+        $scope.search2();
     }
 
     //判断关键字是不是品牌
@@ -154,6 +194,7 @@ app.controller('searchController', function ($scope, $location, searchService) {
     $scope.logout = function () {
         sessionStorage.clear();
     }
+
 
 
 });

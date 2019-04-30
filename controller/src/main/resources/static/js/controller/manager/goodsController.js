@@ -76,6 +76,7 @@ app.controller('goodsController' ,function($scope,$controller ,$location  ,goods
 			serviceObject=goodsService.add( $scope.entity  );//增加 
 		}		*/
 		// serviceObject.success(
+		$scope.entity.gImageUrl=document.getElementById("image_url").value;
         goodsService.add( $scope.entity ).success(
 			function(response){
 				if(response.success){
@@ -213,7 +214,7 @@ app.controller('goodsController' ,function($scope,$controller ,$location  ,goods
     $scope.uploadFile=function(){
         uploadService.uploadFile().success(
             function(response) {
-                if(response.success){//如果上传成功，取出url
+                if(response.code==200){//如果上传成功，取出url
 					console.log(response);
                     $scope.image_entity.url=response.message;//设置文件地址
                 }else{
@@ -224,5 +225,10 @@ app.controller('goodsController' ,function($scope,$controller ,$location  ,goods
             alert("上传发生错误");
         });*/
     };
+    $scope.add_image_entity=function(){
+    	document.getElementById("image_url").value=$scope.image_entity.url
+    	// $scope.entity.gImageUrl=$scope.image_entity.url;
+    };
+
 
 });	

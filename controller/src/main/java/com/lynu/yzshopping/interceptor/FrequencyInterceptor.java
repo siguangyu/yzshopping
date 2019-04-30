@@ -44,12 +44,12 @@ public class FrequencyInterceptor implements HandlerInterceptor {
         String browser = request.getHeader("User-Agent");                                            // 浏览器类型
         String paramString = JSONObject.toJSONString(request.getParameterMap());                            // 获取请求参数
 
-        if(simpleTimeCache.get(ipAddress) != null){                                                           // 5秒内有记录,不允许访问
+       /* if(simpleTimeCache.get(ipAddress) != null){                                                           // 5秒内有记录,不允许访问
             MvcUtil.responseReturnData(response, JSONObject.toJSONString(ResultHandle.getFrequentlyResult()));    // 返回提示
             visitLogServer.save(new VisitLog(ipAddress, uri, paramString, browser, Result.Code.FREQUENTLY));
             simpleTimeCache.put(ipAddress, "");                                                               // 更新访问的时间
             return false;
-        }
+        }*/
 
         simpleTimeCache.put(ipAddress, "");                                                                   // 更新访问的时间
         return true;

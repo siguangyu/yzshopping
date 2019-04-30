@@ -63,8 +63,11 @@
                             <form action="" class="sui-form form-inline">
                                 <!--searchAutoComplete-->
                                 <div class="input-append">
-                                    <input type="text" id="autocomplete"
+                                   <!-- <input type="text" id="autocomplete"
                                            ng-model="key" type="text"
+                                           class="input-error input-xxlarge"/>-->
+                                    <input type="text" id="autocomplete"
+                                           ng-model="searchMap.searchKey" type="text"
                                            class="input-error input-xxlarge"/>
                                     <button class="sui-btn btn-xlarge btn-danger" type="button"
                                             ng-click="search2()">搜索
@@ -129,38 +132,10 @@
 
 <!--list-content-->
 <div class="main">
-<!--<div style="overflow: hidden;margin-left: 50px"  >
-    <div>
-        <h5>推荐: </h5>
-    </div>
-    <div>
-        <span>价格最低：</span>
-        <ul class="yui3-g">
-            <li class="yui3-u-1-5" ng-repeat="item in resultMap">
-                <div class="list-wrap" >
-                    <div class="p-img">
-                        <a href="../detail.html" target="_blank" ng-click="putItem(item)">
-                            <img src="{{item.imgUrl}}"/></a>
-                    </div>
-                    <div class="price">
-                        <strong> <em>¥</em> <i>{{item.price}}</i>
-                        </strong>
-                    </div>
-                    <div class="attr" ng-bind-html="item.title | trustHtml">
-                        <em class="em">{{item.title}}</em>
-                    </div>
-                    <div class="cu">
-                        <em></em>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-</div>-->
     <div class="py-container">
         <!--bread-->
         <div class="bread">
-            <ul class="fl sui-breadcrumb">
+            <!--<ul class="fl sui-breadcrumb">
                 <li><a href="#">搜索条件：</a></li>
 
 
@@ -174,12 +149,12 @@
                     {{key}}：{{value}}<i class="sui-icon icon-tb-close"></i></li>
                 <li class="tag" ng-if="searchMap.price!=''" ng-click="removeSearchItem('price')">
                     价格：{{searchMap.price}}<i class="sui-icon icon-tb-close"></i></li>
-            </ul>
+            </ul>-->
 
             <div class="clearfix"></div>
         </div>
         <!--selector-->
-        <div class="clearfix selector">
+       <!-- <div class="clearfix selector">
             <div class="type-wrap" ng-if="resultMap.categoryList!=null && searchMap.category==''">
                 <div class="fl key">商品分类</div>
                 <div class="fl value">
@@ -206,7 +181,7 @@
                         href="javascript:void(0);">更多</a>
                 </div>
             </div>
-           <!-- <div class="type-wrap" ng-repeat="spec in resultMap.specList" ng-if="searchMap.spec[spec.text]==null">
+            <div class="type-wrap" ng-repeat="spec in resultMap.specList" ng-if="searchMap.spec[spec.text]==null">
                 <div class="fl key">{{spec.text}}</div>
                 <div class="fl value">
                     <ul class="type-list">
@@ -216,9 +191,9 @@
                     </ul>
                 </div>
                 <div class="fl ext"></div>
-            </div>-->
+            </div>
 
-            <!--<div class="type-wrap">
+            <div class="type-wrap">
                 <div class="fl key">价格</div>
                 <div class="fl value">
                     <ul class="type-list" ng-if="searchMap.price==''">
@@ -231,26 +206,30 @@
                     </ul>
                 </div>
                 <div class="fl ext"></div>
-            </div>-->
+            </div>
             <div class="type-wrap">
-                <div class="fl key">商城</div>
+                <div class="fl key">更多筛选项</div>
                 <div class="fl value">
                     <ul class="type-list">
-                        <li ng-repeat="s in domain.data" ng-click="addDomainItem(s)" ><a>{{s}}</a></li>
+                        <li><a>特点</a></li>
+                        <li><a>系统</a></li>
+                        <li><a>手机内存 </a></li>
+                        <li><a>单卡双卡</a></li>
+                        <li><a>其他</a></li>
                     </ul>
                 </div>
                 <div class="fl ext"></div>
             </div>
-        </div>
+        </div>-->
         <!--details-->
         <div class="details">
             <div class="sui-navbar">
                 <div class="navbar-inner filter">
                     <ul class="sui-nav">
                         <li class="active"><a href="#" ng-click="sortSearch('','')">综合</a></li>
-                        <!--<li><a href="#">销量</a></li>-->
-                        <!--<li><a href="#" ng-click="sortSearch('updatetime','DESC')">新品</a></li>-->
-                        <li><a href="#" ng-click="sortSearch('comnum','DESC')">评价最多</a></li>
+                        <li><a href="#">销量</a></li>
+                        <li><a href="#" ng-click="sortSearch('updatetime','DESC')">新品</a></li>
+                        <li><a href="#">评价</a></li>
                         <li><a href="#" ng-click="sortSearch('price','ASC')">价格↑</a></li>
                         <li><a href="#" ng-click="sortSearch('price','DESC')">价格↓</a></li>
                     </ul>
@@ -259,14 +238,14 @@
             <div class="goods-list">
                 <span style="text-align: center" id="error"> 抱歉，未搜索到该商品，您可以尝试更换搜索关键字或者重新加载 </span>
                 <ul class="yui3-g">
-                    <li class="yui3-u-1-5" ng-repeat="item in resultMap.data.list">
+                    <li class="yui3-u-1-5" ng-repeat="item in resultMap">
                         <div class="list-wrap" >
                             <div class="p-img">
                                 <a href="../detail.html" target="_blank" ng-click="putItem(item)">
                                     <img src="{{item.imgUrl}}"/></a>
                             </div>
                             <div class="price">
-                                <strong> <em>{{item.domainch}}</em> <i>¥{{item.price}}</i>
+                                <strong> <em>¥</em> <i>{{item.price}}</i>
                                 </strong>
                             </div>
                             <div class="attr" ng-bind-html="item.title | trustHtml">

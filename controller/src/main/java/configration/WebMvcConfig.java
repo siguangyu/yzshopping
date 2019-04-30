@@ -26,6 +26,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         // registry.addInterceptor(frequencyInterceptor).addPathPatterns("/user/**").excludePathPatterns("/user/login");
         // registry.addInterceptor(frequencyInterceptor).addPathPatterns("/hello/**");
         registry.addInterceptor(frequencyInterceptor).addPathPatterns("/data-interface/**");
+        registry.addInterceptor(frequencyInterceptor).addPathPatterns("/data-interface/**").excludePathPatterns("/data-interface/search");
     }
 
     @Bean
