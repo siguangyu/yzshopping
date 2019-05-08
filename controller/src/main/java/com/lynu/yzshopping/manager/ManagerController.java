@@ -1,12 +1,12 @@
 package com.lynu.yzshopping.manager;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lynu.yzshopping.mybatis.entity.Manager;
-import com.lynu.yzshopping.mybatis.entity.Result;
-import com.lynu.yzshopping.mybatis.entity.ScoreShop;
-import com.lynu.yzshopping.mybatis.entity.User;
+import com.github.pagehelper.PageHelper;
+import com.lynu.yzshopping.mybatis.entity.*;
 import com.lynu.yzshopping.service.ManagerService;
 import com.lynu.yzshopping.service.ScoreShopService;
+import com.lynu.yzshopping.service.UserGoodMappingService;
+import com.lynu.yzshopping.service.UserService;
 import com.lynu.yzshopping.service.constants.YZConstants;
 import com.lynu.yzshopping.util.Md5Util;
 import com.lynu.yzshopping.util.ResultHandle;
@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,12 @@ public class ManagerController {
 
     @Autowired
     ScoreShopService scoreShopService;
+
+    @Autowired
+    UserGoodMappingService userGoodMappingService;
+
+    @Autowired
+    UserService userService;
 
     @ApiOperation(value = "登录", notes = "登录")
     @PostMapping("login")
@@ -70,16 +77,16 @@ public class ManagerController {
     @PostMapping("addGood")
     public Result addGood(@RequestBody String jsonBody) {
         JSONObject json = JSONObject.parseObject(jsonBody);
-        String gTitle = (String)json.get("gTitle");
-        String gImageUrl = (String)json.get("gImageUrl");
-        String gPrice = (String)json.get("gPrice");
-        String gNumber = (String)json.get("gNumber");
-        String gDelete = (String)json.get("gDelete");
-        if (StringUtils.isBlank(gDelete)){
-            gDelete= YZConstants.XIAJIA_NO+"";
+        String gTitle = (String) json.get("gTitle");
+        String gImageUrl = (String) json.get("gImageUrl");
+        String gPrice = (String) json.get("gPrice");
+        String gNumber = (String) json.get("gNumber");
+        String gDelete = (String) json.get("gDelete");
+        if (StringUtils.isBlank(gDelete)) {
+            gDelete = YZConstants.XIAJIA_NO + "";
         }
 
-        ScoreShop scoreShop=new ScoreShop();
+        ScoreShop scoreShop = new ScoreShop();
         scoreShop.setgTitle(gTitle);
         scoreShop.setgImageUrl(gImageUrl);
         scoreShop.setgPrice(gPrice);
@@ -88,11 +95,74 @@ public class ManagerController {
 //添加商品
         int i = scoreShopService.insert(scoreShop);
 
-        if (i==1){
+        if (i == 1) {
             return ResultHandle.getSuccessResult("添加成功");
-        }else{
+        } else {
             return ResultHandle.getFailResult("添加失败");
         }
 
     }
+
+    @ApiOperation(value = "根据订单状态查询", notes = "根据订单状态查询")
+    @PostMapping("selectOrderByCondition")
+    public Result selectOrderByCondition(@RequestBody(required = false) String jsonBody) {
+        JSONObject json = JSONObject.parseObject(jsonBody);
+
+        String transactionStatus = (String) json.get("transactionStatus");
+        if (StringUtils.isBlank(transactionStatus)){
+            transactionStatus=null;
+        }
+        Map<String, Object> map = new HashMap<>();
+        List<Map<String, Object>> list = new ArrayList<>();
+
+        map.put("transactionStatus", transactionStatus);
+
+        List<UserGoodMapping> userGoodMappingList = userGoodMappingService.selectByConditionMap(map);
+        //根据用户id获取到用户的用户名
+        for (UserGoodMapping userGoodMapping : userGoodMappingList) {
+            Integer userId=userGoodMapping.getUserId();
+            User user = userService.selectByPrimaryKey(userId);
+            Integer goodsId=userGoodMapping.getGoodsId();
+            ScoreShop scoreShop = scoreShopService.selectByPrimaryKey(goodsId);
+            Map<String,Object> resMap=new HashMap<>();
+            resMap.put("id",userGoodMapping.getId());
+            resMap.put("gImageUrl",scoreShop.getgImageUrl());
+            resMap.put("gTitle",scoreShop.getgTitle());
+            resMap.put("userName", user.getUsername());
+            resMap.put("createTime",userGoodMapping.getCreateTime());
+            String status=userGoodMapping.getTransactionStatus().equals(YZConstants.TRANING_STATUS+"")?"待处理":"处理完成";
+            resMap.put("status",status);
+            list.add(resMap);
+        }
+        return ResultHandle.getSuccessResult().setData(list);
+    }
+
+    @ApiOperation(value = "根据映射表id更改交易状态", notes = "根据映射表id更改交易状态")
+    @PostMapping("updateByOrderId")
+    public Result updateByOrderId(@RequestBody Integer id) {
+
+//        JSONObject json = JSONObject.parseObject(jsonBody);
+
+//        String idStr = (String) json.get("id");
+
+        String transactionStatus ="";
+        UserGoodMapping userGoodMapping = userGoodMappingService.selectByPrimaryKey(id);
+        if (userGoodMapping.getTransactionStatus().equals(YZConstants.TRANING_STATUS+"")){
+            transactionStatus="1";
+        }
+
+        if (userGoodMapping.getTransactionStatus().equals(YZConstants.TRAN_OK_STATUS+"")){
+            transactionStatus="0";
+        }
+        userGoodMapping.setTransactionStatus(transactionStatus);
+        try {
+            userGoodMappingService.updateByPrimaryKeySelective(userGoodMapping);
+            return ResultHandle.getSuccessResult("修改成功");
+        } catch (Exception e) {
+            return ResultHandle.getFailResult("修改失败");
+        }
+
+
+    }
+
 }

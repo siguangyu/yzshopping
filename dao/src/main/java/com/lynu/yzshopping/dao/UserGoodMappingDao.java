@@ -11,4 +11,8 @@ public interface UserGoodMappingDao {
     int insert(UserGoodMapping record);
 
     List<UserGoodMapping> selectByConditionMap(Map<String, Object> map) ;
+
+    int updateByPrimaryKeySelective(UserGoodMapping record);
+
+    UserGoodMapping selectByPrimaryKey(Integer id);
 }

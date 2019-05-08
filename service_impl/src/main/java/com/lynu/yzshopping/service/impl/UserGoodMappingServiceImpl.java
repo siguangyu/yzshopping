@@ -23,4 +23,14 @@ public class UserGoodMappingServiceImpl implements UserGoodMappingService {
     public List<UserGoodMapping> selectByConditionMap(Map<String, Object> map) {
         return userGoodMappingDao.selectByConditionMap(map);
     }
+
+    @Override
+    public int updateByPrimaryKeySelective(UserGoodMapping record) {
+        return userGoodMappingDao.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public UserGoodMapping selectByPrimaryKey(Integer id) {
+        return userGoodMappingDao.selectByPrimaryKey(id);
+    }
 }

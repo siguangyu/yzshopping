@@ -9,5 +9,7 @@ import java.util.Map;
 public interface UserGoodMappingService {
     List<UserGoodMapping> selectByConditionMap(Map<String, Object> map);
 
+    int updateByPrimaryKeySelective(UserGoodMapping record);
 
+    UserGoodMapping selectByPrimaryKey(Integer id);
 }
